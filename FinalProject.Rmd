@@ -1,0 +1,23 @@
+---
+title: "Final Project: Occcupations"
+names: "Lily Jakielaszek, Allison Denenberg, Ayoolwatomiwa Ogunrombi"
+output: html_notebook
+---
+
+### Load the Libraries 
+```{r}
+library(DataComputing)
+library(lubridate)
+library(tidyverse)
+```
+
+### Load the Datasets
+```{r}
+data()
+```
+
+### Research Question
+What occupations make the most money and have the greatest future outlook?
+
+### Becoming Acquainted with the Dataset
+
