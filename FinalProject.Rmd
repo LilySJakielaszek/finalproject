@@ -25,6 +25,8 @@ degrees_that_pay_back = readr::read_csv("degrees-that-pay-back.csv")
 ### Research Question
 What occupations and majors by state will have the highest salary and have the greatest future outlook?
 
+### Quick Look at the Datasets
+
 ### Becoming Acquainted with the Dataset 
 1. Where did you find them?
 
@@ -88,4 +90,6 @@ salaries_by_region
 
 
 Describe preliminary observations and intuition about the research question
+
+
 
