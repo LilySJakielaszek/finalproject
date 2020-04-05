@@ -1790,10 +1790,139 @@ degrees_that_pay_back = readr::read_csv(&quot;degrees-that-pay-back.csv&quot;)</
 </div>
 <div id="becoming-acquainted-with-the-dataset" class="section level3">
 <h3>Becoming Acquainted with the Dataset</h3>
+<ol style="list-style-type: decimal">
+<li>Where did you find them?</li>
+</ol>
+<p>The first dataset was found on Data.World, the other three datasets were found on Kaggle.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Who collected/maintains them?</li>
+</ol>
+<p>The data from Data.World swas collected and updated by J. Albert Bowden II The data from Kaggle says that all data was obtained from the Wall Street Journal based on data from Payscale, Inc 3 years ago</p>
+<ol start="3" style="list-style-type: decimal">
+<li>When &amp; Why were they originally collected?</li>
+</ol>
+<p>Both datasets were created 3 years ago and both had updates only 3 years ago as well. For the Data.World dataset, it was made to informed career decisions For the Kaggle salaries by region dataset, it was made to look at schools and regions salaries by mid-career. For the Kaggle salaries by college_type dataset, it was made to compare rankings of type of colleges you attended (ivy league, engeenering school) For the Kaggle degrees that pay back dataset, it was made to define which majors make the most money</p>
+<ol start="4" style="list-style-type: decimal">
+<li><p>What does a case represent in each data source, and how many total cases are available?</p></li>
+<li></li>
+</ol>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2xpbXBzZShPY2N1cGF0aW9uUHJvamVjdGlvbilcbmBgYCJ9 -->
+<pre class="r"><code>glimpse(OccupationProjection)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiT2JzZXJ2YXRpb25zOiAzNCw5ODJcblZhcmlhYmxlczogMTFcbiQgU3RhdGUuRklQUyAgICAgICAgICAgICAgXHUwMDFiWzNtXHUwMDFiWzM4OzU7MjQ2bTxpbnQ+XHUwMDFiWzM5bVx1MDAxYlsyM20gMCwgMCwgMCwgMCwgMCwgMCwgMCwgMCwgMCwgMCwgMCwgMCwgMCwgMCwgMCwgMCwgMCwgMCwgMCwgMCwgMCwgMCwgMCwgMCwgMCwgMOKAplxuJCBBcmVhLk5hbWUgICAgICAgICAgICAgICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGNocj5cdTAwMWJbMzltXHUwMDFiWzIzbSBcIiBVbml0ZWQgU3RhdGVzXCIsIFwiIFVuaXRlZCBTdGF0ZXNcIiwgXCIgVW5pdGVkIFN0YXRlc1wiLCBcIiBVbml0ZWQgU3RhdGVzXCIsIFwiIFVu4oCmXG4kIE9jY3VwYXRpb24uQ29kZSAgICAgICAgIFx1MDAxYlszbVx1MDAxYlszODs1OzI0Nm08Y2hyPlx1MDAxYlszOW1cdTAwMWJbMjNtIFwiMDAtMDAwMFwiLCBcIjExLTEwMTFcIiwgXCIxMS0xMDIxXCIsIFwiMTEtMTAzMVwiLCBcIjExLTIwMTFcIiwgXCIxMS0yMDIxXCIsIFwiMTEtMjAyMlwiLOKAplxuJCBPY2N1cGF0aW9uLk5hbWUgICAgICAgICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGNocj5cdTAwMWJbMzltXHUwMDFiWzIzbSBcIlRvdGFsLCBBbGwgT2NjdXBhdGlvbnNcIiwgXCJDaGllZiBFeGVjdXRpdmVzXCIsIFwiR2VuZXJhbCBhbmQgT3BlcmF0aW9ucyBNYW5hZ2XigKZcbiQgQmFzZS5ZZWFyICAgICAgICAgICAgICAgXHUwMDFiWzNtXHUwMDFiWzM4OzU7MjQ2bTxpbnQ+XHUwMDFiWzM5bVx1MDAxYlsyM20gMjAxNCwgMjAxNCwgMjAxNCwgMjAxNCwgMjAxNCwgMjAxNCwgMjAxNCwgMjAxNCwgMjAxNCwgMjAxNCwgMjAxNCwgMjAxNCwgMjAxNOKAplxuJCBCYXNlICAgICAgICAgICAgICAgICAgICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGludD5cdTAwMWJbMzltXHUwMDFiWzIzbSAxNTA1Mzk5MDAsIDM0MzQwMCwgMjEyNDEwMCwgNTgzMDAsIDMxMDAwLCAxOTQzMDAsIDM3NjMwMCwgNjU4MDAsIDI4NzMwMCwgMzQ44oCmXG4kIFByb2plY3RlZC5ZZWFyICAgICAgICAgIFx1MDAxYlszbVx1MDAxYlszODs1OzI0Nm08aW50Plx1MDAxYlszOW1cdTAwMWJbMjNtIDIwMjQsIDIwMjQsIDIwMjQsIDIwMjQsIDIwMjQsIDIwMjQsIDIwMjQsIDIwMjQsIDIwMjQsIDIwMjQsIDIwMjQsIDIwMjQsIDIwMjTigKZcbiQgUHJvamVjdGlvbiAgICAgICAgICAgICAgXHUwMDFiWzNtXHUwMDFiWzM4OzU7MjQ2bTxpbnQ+XHUwMDFiWzM5bVx1MDAxYlsyM20gMTYwMzI4ODAwLCAzMzk0MDAsIDIyNzUyMDAsIDU3OTAwLCAzMjQwMCwgMjEyNTAwLCAzOTUzMDAsIDcwNTAwLCAzMTA4MDAsIDQwMuKAplxuJCBDaGFuZ2UgICAgICAgICAgICAgICAgICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGludD5cdTAwMWJbMzltXHUwMDFiWzIzbSA5Nzg4OTAwLCAtNDEwMCwgMTUxMTAwLCAtNDAwLCAxNTAwLCAxODIwMCwgMTkwMDAsIDQ3MDAsIDIzNTAwLCA1MzcwMCwgMzc3MDAs4oCmXG4kIFBlcmNlbnQuQ2hhbmdlICAgICAgICAgIFx1MDAxYlszbVx1MDAxYlszODs1OzI0Nm08ZGJsPlx1MDAxYlszOW1cdTAwMWJbMjNtIDYuNSwgLTEuMiwgNy4xLCAtMC43LCA0LjcsIDkuNCwgNS4xLCA3LjEsIDguMiwgMTUuNCwgNi44LCAtMy43LCAxLjAsIDIuMiwgNi7igKZcbiQgQXZlcmFnZS5Bbm51YWwuT3BlbmluZ3MgXHUwMDFiWzNtXHUwMDFiWzM4OzU7MjQ2bTxpbnQ+XHUwMDFiWzM5bVx1MDAxYlsyM20gNDY1MDY5MCwgNTg0MCwgNjg4ODAsIDEyOTAsIDExNDAsIDY0MjAsIDEwODAwLCAyNzEwLCA3NzIwLCA5NDgwLCAxNjkzMCwgNDkxMOKAplxuIn0= -->
+<pre><code>Observations: 34,982
+Variables: 11
+$ State.FIPS              [3m[38;5;246m&lt;int&gt;[39m[23m 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+$ Area.Name               [3m[38;5;246m&lt;chr&gt;[39m[23m &quot; United States&quot;, &quot; United States&quot;, &quot; United States&quot;, &quot; United States&quot;, &quot; Un…
+$ Occupation.Code         [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;00-0000&quot;, &quot;11-1011&quot;, &quot;11-1021&quot;, &quot;11-1031&quot;, &quot;11-2011&quot;, &quot;11-2021&quot;, &quot;11-2022&quot;,…
+$ Occupation.Name         [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;Total, All Occupations&quot;, &quot;Chief Executives&quot;, &quot;General and Operations Manage…
+$ Base.Year               [3m[38;5;246m&lt;int&gt;[39m[23m 2014, 2014, 2014, 2014, 2014, 2014, 2014, 2014, 2014, 2014, 2014, 2014, 2014…
+$ Base                    [3m[38;5;246m&lt;int&gt;[39m[23m 150539900, 343400, 2124100, 58300, 31000, 194300, 376300, 65800, 287300, 348…
+$ Projected.Year          [3m[38;5;246m&lt;int&gt;[39m[23m 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024…
+$ Projection              [3m[38;5;246m&lt;int&gt;[39m[23m 160328800, 339400, 2275200, 57900, 32400, 212500, 395300, 70500, 310800, 402…
+$ Change                  [3m[38;5;246m&lt;int&gt;[39m[23m 9788900, -4100, 151100, -400, 1500, 18200, 19000, 4700, 23500, 53700, 37700,…
+$ Percent.Change          [3m[38;5;246m&lt;dbl&gt;[39m[23m 6.5, -1.2, 7.1, -0.7, 4.7, 9.4, 5.1, 7.1, 8.2, 15.4, 6.8, -3.7, 1.0, 2.2, 6.…
+$ Average.Annual.Openings [3m[38;5;246m&lt;int&gt;[39m[23m 4650690, 5840, 68880, 1290, 1140, 6420, 10800, 2710, 7720, 9480, 16930, 4910…</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>A case represents an area such as nation (United States) or state and an occupation name. There are 34,982 cases. 2.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2xpbXBzZShzYWxhcmllc19ieV9yZWdpb24pXG5gYGAifQ== -->
+<pre class="r"><code>glimpse(salaries_by_region)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiT2JzZXJ2YXRpb25zOiAzMjBcblZhcmlhYmxlczogOFxuJCBgU2Nob29sIE5hbWVgICAgICAgICAgICAgICAgICAgICAgICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGNocj5cdTAwMWJbMzltXHUwMDFiWzIzbSBcIlN0YW5mb3JkIFVuaXZlcnNpdHlcIiwgXCJDYWxpZm9ybmlhIEluc3RpdHV0ZSBvZiBUZWNobm9sb2d5IChDSVQp4oCmXG4kIFJlZ2lvbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFx1MDAxYlszbVx1MDAxYlszODs1OzI0Nm08Y2hyPlx1MDAxYlszOW1cdTAwMWJbMjNtIFwiQ2FsaWZvcm5pYVwiLCBcIkNhbGlmb3JuaWFcIiwgXCJDYWxpZm9ybmlhXCIsIFwiQ2FsaWZvcm5pYVwiLCBcIkNhbGlmb3LigKZcbiQgYFN0YXJ0aW5nIE1lZGlhbiBTYWxhcnlgICAgICAgICAgICAgXHUwMDFiWzNtXHUwMDFiWzM4OzU7MjQ2bTxjaHI+XHUwMDFiWzM5bVx1MDAxYlsyM20gXCIkNzAsNDAwLjAwXCIsIFwiJDc1LDUwMC4wMFwiLCBcIiQ3MSw4MDAuMDBcIiwgXCIkNTksOTAwLjAwXCIsIFwiJDUxLDkwMOKAplxuJCBgTWlkLUNhcmVlciBNZWRpYW4gU2FsYXJ5YCAgICAgICAgICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGNocj5cdTAwMWJbMzltXHUwMDFiWzIzbSBcIiQxMjksMDAwLjAwXCIsIFwiJDEyMywwMDAuMDBcIiwgXCIkMTIyLDAwMC4wMFwiLCBcIiQxMTIsMDAwLjAwXCIsIFwiJDEw4oCmXG4kIGBNaWQtQ2FyZWVyIDEwdGggUGVyY2VudGlsZSBTYWxhcnlgIFx1MDAxYlszbVx1MDAxYlszODs1OzI0Nm08Y2hyPlx1MDAxYlszOW1cdTAwMWJbMjNtIFwiJDY4LDQwMC4wMFwiLCBcIk4vQVwiLCBcIk4vQVwiLCBcIiQ1OSw1MDAuMDBcIiwgXCJOL0FcIiwgXCIkNTUsMDAwLjAwXCIsIFwi4oCmXG4kIGBNaWQtQ2FyZWVyIDI1dGggUGVyY2VudGlsZSBTYWxhcnlgIFx1MDAxYlszbVx1MDAxYlszODs1OzI0Nm08Y2hyPlx1MDAxYlszOW1cdTAwMWJbMjNtIFwiJDkzLDEwMC4wMFwiLCBcIiQxMDQsMDAwLjAwXCIsIFwiJDk2LDAwMC4wMFwiLCBcIiQ4MSwwMDAuMDBcIiwgXCIkNTQsODDigKZcbiQgYE1pZC1DYXJlZXIgNzV0aCBQZXJjZW50aWxlIFNhbGFyeWAgXHUwMDFiWzNtXHUwMDFiWzM4OzU7MjQ2bTxjaHI+XHUwMDFiWzM5bVx1MDAxYlsyM20gXCIkMTg0LDAwMC4wMFwiLCBcIiQxNjEsMDAwLjAwXCIsIFwiJDE4MCwwMDAuMDBcIiwgXCIkMTQ5LDAwMC4wMFwiLCBcIiQxNeKAplxuJCBgTWlkLUNhcmVlciA5MHRoIFBlcmNlbnRpbGUgU2FsYXJ5YCBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGNocj5cdTAwMWJbMzltXHUwMDFiWzIzbSBcIiQyNTcsMDAwLjAwXCIsIFwiTi9BXCIsIFwiTi9BXCIsIFwiJDIwMSwwMDAuMDBcIiwgXCJOL0FcIiwgXCIkMTc4LDAwMC4wMFwi4oCmXG4ifQ== -->
+<pre><code>Observations: 320
+Variables: 8
+$ `School Name`                       [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;Stanford University&quot;, &quot;California Institute of Technology (CIT)…
+$ Region                              [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;California&quot;, &quot;California&quot;, &quot;California&quot;, &quot;California&quot;, &quot;Califor…
+$ `Starting Median Salary`            [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;$70,400.00&quot;, &quot;$75,500.00&quot;, &quot;$71,800.00&quot;, &quot;$59,900.00&quot;, &quot;$51,900…
+$ `Mid-Career Median Salary`          [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;$129,000.00&quot;, &quot;$123,000.00&quot;, &quot;$122,000.00&quot;, &quot;$112,000.00&quot;, &quot;$10…
+$ `Mid-Career 10th Percentile Salary` [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;$68,400.00&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;$59,500.00&quot;, &quot;N/A&quot;, &quot;$55,000.00&quot;, &quot;…
+$ `Mid-Career 25th Percentile Salary` [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;$93,100.00&quot;, &quot;$104,000.00&quot;, &quot;$96,000.00&quot;, &quot;$81,000.00&quot;, &quot;$54,80…
+$ `Mid-Career 75th Percentile Salary` [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;$184,000.00&quot;, &quot;$161,000.00&quot;, &quot;$180,000.00&quot;, &quot;$149,000.00&quot;, &quot;$15…
+$ `Mid-Career 90th Percentile Salary` [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;$257,000.00&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;$201,000.00&quot;, &quot;N/A&quot;, &quot;$178,000.00&quot;…</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>A case represents a school name and region. There are 320 cases. 3.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2xpbXBzZShzYWxhcmllc19ieV9jb2xsZWdlX3R5cGUpXG5gYGAifQ== -->
+<pre class="r"><code>glimpse(salaries_by_college_type)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiT2JzZXJ2YXRpb25zOiAyNjlcblZhcmlhYmxlczogOFxuJCBgU2Nob29sIE5hbWVgICAgICAgICAgICAgICAgICAgICAgICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGNocj5cdTAwMWJbMzltXHUwMDFiWzIzbSBcIk1hc3NhY2h1c2V0dHMgSW5zdGl0dXRlIG9mIFRlY2hub2xvZ3kgKE1JVClcIiwgXCJDYWxpZm9ybmlhIEluc3Rp4oCmXG4kIGBTY2hvb2wgVHlwZWAgICAgICAgICAgICAgICAgICAgICAgIFx1MDAxYlszbVx1MDAxYlszODs1OzI0Nm08Y2hyPlx1MDAxYlszOW1cdTAwMWJbMjNtIFwiRW5naW5lZXJpbmdcIiwgXCJFbmdpbmVlcmluZ1wiLCBcIkVuZ2luZWVyaW5nXCIsIFwiRW5naW5lZXJpbmdcIiwgXCJFbmfigKZcbiQgYFN0YXJ0aW5nIE1lZGlhbiBTYWxhcnlgICAgICAgICAgICAgXHUwMDFiWzNtXHUwMDFiWzM4OzU7MjQ2bTxjaHI+XHUwMDFiWzM5bVx1MDAxYlsyM20gXCIkNzIsMjAwLjAwXCIsIFwiJDc1LDUwMC4wMFwiLCBcIiQ3MSw4MDAuMDBcIiwgXCIkNjIsNDAwLjAwXCIsIFwiJDYyLDIwMOKAplxuJCBgTWlkLUNhcmVlciBNZWRpYW4gU2FsYXJ5YCAgICAgICAgICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGNocj5cdTAwMWJbMzltXHUwMDFiWzIzbSBcIiQxMjYsMDAwLjAwXCIsIFwiJDEyMywwMDAuMDBcIiwgXCIkMTIyLDAwMC4wMFwiLCBcIiQxMTQsMDAwLjAwXCIsIFwiJDEx4oCmXG4kIGBNaWQtQ2FyZWVyIDEwdGggUGVyY2VudGlsZSBTYWxhcnlgIFx1MDAxYlszbVx1MDAxYlszODs1OzI0Nm08Y2hyPlx1MDAxYlszOW1cdTAwMWJbMjNtIFwiJDc2LDgwMC4wMFwiLCBcIk4vQVwiLCBcIk4vQVwiLCBcIiQ2Niw4MDAuMDBcIiwgXCJOL0FcIiwgXCIkODAsMDAwLjAwXCIsIFwi4oCmXG4kIGBNaWQtQ2FyZWVyIDI1dGggUGVyY2VudGlsZSBTYWxhcnlgIFx1MDAxYlszbVx1MDAxYlszODs1OzI0Nm08Y2hyPlx1MDAxYlszOW1cdTAwMWJbMjNtIFwiJDk5LDIwMC4wMFwiLCBcIiQxMDQsMDAwLjAwXCIsIFwiJDk2LDAwMC4wMFwiLCBcIiQ5NCwzMDAuMDBcIiwgXCIkODAsMjDigKZcbiQgYE1pZC1DYXJlZXIgNzV0aCBQZXJjZW50aWxlIFNhbGFyeWAgXHUwMDFiWzNtXHUwMDFiWzM4OzU7MjQ2bTxjaHI+XHUwMDFiWzM5bVx1MDAxYlsyM20gXCIkMTY4LDAwMC4wMFwiLCBcIiQxNjEsMDAwLjAwXCIsIFwiJDE4MCwwMDAuMDBcIiwgXCIkMTQzLDAwMC4wMFwiLCBcIiQxNOKAplxuJCBgTWlkLUNhcmVlciA5MHRoIFBlcmNlbnRpbGUgU2FsYXJ5YCBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGNocj5cdTAwMWJbMzltXHUwMDFiWzIzbSBcIiQyMjAsMDAwLjAwXCIsIFwiTi9BXCIsIFwiTi9BXCIsIFwiJDE5MCwwMDAuMDBcIiwgXCJOL0FcIiwgXCIkMTgwLDAwMC4wMFwi4oCmXG4ifQ== -->
+<pre><code>Observations: 269
+Variables: 8
+$ `School Name`                       [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;Massachusetts Institute of Technology (MIT)&quot;, &quot;California Insti…
+$ `School Type`                       [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;Engineering&quot;, &quot;Engineering&quot;, &quot;Engineering&quot;, &quot;Engineering&quot;, &quot;Eng…
+$ `Starting Median Salary`            [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;$72,200.00&quot;, &quot;$75,500.00&quot;, &quot;$71,800.00&quot;, &quot;$62,400.00&quot;, &quot;$62,200…
+$ `Mid-Career Median Salary`          [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;$126,000.00&quot;, &quot;$123,000.00&quot;, &quot;$122,000.00&quot;, &quot;$114,000.00&quot;, &quot;$11…
+$ `Mid-Career 10th Percentile Salary` [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;$76,800.00&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;$66,800.00&quot;, &quot;N/A&quot;, &quot;$80,000.00&quot;, &quot;…
+$ `Mid-Career 25th Percentile Salary` [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;$99,200.00&quot;, &quot;$104,000.00&quot;, &quot;$96,000.00&quot;, &quot;$94,300.00&quot;, &quot;$80,20…
+$ `Mid-Career 75th Percentile Salary` [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;$168,000.00&quot;, &quot;$161,000.00&quot;, &quot;$180,000.00&quot;, &quot;$143,000.00&quot;, &quot;$14…
+$ `Mid-Career 90th Percentile Salary` [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;$220,000.00&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;$190,000.00&quot;, &quot;N/A&quot;, &quot;$180,000.00&quot;…</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>A case represents a school name and school type. There are 269 cases. 4.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2xpbXBzZShkZWdyZWVzX3RoYXRfcGF5X2JhY2spXG5gYGAifQ== -->
+<pre class="r"><code>glimpse(degrees_that_pay_back)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiT2JzZXJ2YXRpb25zOiA1MFxuVmFyaWFibGVzOiA4XG4kIGBVbmRlcmdyYWR1YXRlIE1ham9yYCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGNocj5cdTAwMWJbMzltXHUwMDFiWzIzbSBcIkFjY291bnRpbmdcIiwgXCJBZXJvc3BhY2UgRW5naW5lZXJpbmdcIiwgXCJBZ3JpY3VsdOKAplxuJCBgU3RhcnRpbmcgTWVkaWFuIFNhbGFyeWAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXHUwMDFiWzNtXHUwMDFiWzM4OzU7MjQ2bTxjaHI+XHUwMDFiWzM5bVx1MDAxYlsyM20gXCIkNDYsMDAwLjAwXCIsIFwiJDU3LDcwMC4wMFwiLCBcIiQ0Miw2MDAuMDBcIiwgXCIkMzYsOOKAplxuJCBgTWlkLUNhcmVlciBNZWRpYW4gU2FsYXJ5YCAgICAgICAgICAgICAgICAgICAgICAgICAgXHUwMDFiWzNtXHUwMDFiWzM4OzU7MjQ2bTxjaHI+XHUwMDFiWzM5bVx1MDAxYlsyM20gXCIkNzcsMTAwLjAwXCIsIFwiJDEwMSwwMDAuMDBcIiwgXCIkNzEsOTAwLjAwXCIsIFwiJDYxLOKAplxuJCBgUGVyY2VudCBjaGFuZ2UgZnJvbSBTdGFydGluZyB0byBNaWQtQ2FyZWVyIFNhbGFyeWAgXHUwMDFiWzNtXHUwMDFiWzM4OzU7MjQ2bTxkYmw+XHUwMDFiWzM5bVx1MDAxYlsyM20gNjcuNiwgNzUuMCwgNjguOCwgNjcuMSwgODQuNiwgODEuMywgNjcuMCwgNjcuNywg4oCmXG4kIGBNaWQtQ2FyZWVyIDEwdGggUGVyY2VudGlsZSBTYWxhcnlgICAgICAgICAgICAgICAgICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGNocj5cdTAwMWJbMzltXHUwMDFiWzIzbSBcIiQ0MiwyMDAuMDBcIiwgXCIkNjQsMzAwLjAwXCIsIFwiJDM2LDMwMC4wMFwiLCBcIiQzMyw44oCmXG4kIGBNaWQtQ2FyZWVyIDI1dGggUGVyY2VudGlsZSBTYWxhcnlgICAgICAgICAgICAgICAgICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGNocj5cdTAwMWJbMzltXHUwMDFiWzIzbSBcIiQ1NiwxMDAuMDBcIiwgXCIkODIsMTAwLjAwXCIsIFwiJDUyLDEwMC4wMFwiLCBcIiQ0NSw14oCmXG4kIGBNaWQtQ2FyZWVyIDc1dGggUGVyY2VudGlsZSBTYWxhcnlgICAgICAgICAgICAgICAgICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGNocj5cdTAwMWJbMzltXHUwMDFiWzIzbSBcIiQxMDgsMDAwLjAwXCIsIFwiJDEyNywwMDAuMDBcIiwgXCIkOTYsMzAwLjAwXCIsIFwiJDg54oCmXG4kIGBNaWQtQ2FyZWVyIDkwdGggUGVyY2VudGlsZSBTYWxhcnlgICAgICAgICAgICAgICAgICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGNocj5cdTAwMWJbMzltXHUwMDFiWzIzbSBcIiQxNTIsMDAwLjAwXCIsIFwiJDE2MSwwMDAuMDBcIiwgXCIkMTUwLDAwMC4wMFwiLCBcIiQx4oCmXG4ifQ== -->
+<pre><code>Observations: 50
+Variables: 8
+$ `Undergraduate Major`                               [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;Accounting&quot;, &quot;Aerospace Engineering&quot;, &quot;Agricult…
+$ `Starting Median Salary`                            [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;$46,000.00&quot;, &quot;$57,700.00&quot;, &quot;$42,600.00&quot;, &quot;$36,8…
+$ `Mid-Career Median Salary`                          [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;$77,100.00&quot;, &quot;$101,000.00&quot;, &quot;$71,900.00&quot;, &quot;$61,…
+$ `Percent change from Starting to Mid-Career Salary` [3m[38;5;246m&lt;dbl&gt;[39m[23m 67.6, 75.0, 68.8, 67.1, 84.6, 81.3, 67.0, 67.7, …
+$ `Mid-Career 10th Percentile Salary`                 [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;$42,200.00&quot;, &quot;$64,300.00&quot;, &quot;$36,300.00&quot;, &quot;$33,8…
+$ `Mid-Career 25th Percentile Salary`                 [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;$56,100.00&quot;, &quot;$82,100.00&quot;, &quot;$52,100.00&quot;, &quot;$45,5…
+$ `Mid-Career 75th Percentile Salary`                 [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;$108,000.00&quot;, &quot;$127,000.00&quot;, &quot;$96,300.00&quot;, &quot;$89…
+$ `Mid-Career 90th Percentile Salary`                 [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;$152,000.00&quot;, &quot;$161,000.00&quot;, &quot;$150,000.00&quot;, &quot;$1…</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>A case represents an undergraduate major. There are 50 cases.</p>
+<ol start="5" style="list-style-type: decimal">
+<li>What are some of the variables that you plan to use</li>
+</ol>
+<p>We plan to use School Name, School Type, Mid-Career Median Salary, Starting Median Salary, Percent change from Starting to Mid-Career Salary, Region, Area.name, Occupation.name, Base.Year, Projected.Year, Average.Annual.Openings, Percent.Change</p>
+<p>We plan to connect some of these datasets by the State name, as well as use some datasets alone.</p>
+</div>
+<div id="explore-intuition-related-to-the-research-question" class="section level3">
+<h3>Explore intuition related to the research question</h3>
+<ol style="list-style-type: decimal">
+<li>Create some informative plots and summary statistics</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li></li>
+</ol>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2FsYXJpZXNfYnlfcmVnaW9uICU+JVxuICBhcy5udW1lcmljKFwiTWlkLUNhcmVlciBNZWRpYW4gU2FsYXJ5XCIpICU+JVxuICBhcy5udW1lcmljKFwiU3RhcnRpbmcgTWVkaWFuIFNhbGFyeVwiKSAlPiVcbiAgZ3JvdXBfYnkoUmVnaW9uKSAlPiVcbiAgc3VtbWFyaXNlKGRpZmZlcmVuY2UgPSBcIk1pZC1DYXJlZXIgTWVkaWFuIFNhbGFyeVwiIC0gXCJTdGFydGluZyBNZWRpYW4gU2FsYXJ5XCIpIFxuYGBgIn0= -->
+<pre class="r"><code>salaries_by_region %&gt;%
+  as.numeric(&quot;Mid-Career Median Salary&quot;) %&gt;%
+  as.numeric(&quot;Starting Median Salary&quot;) %&gt;%
+  group_by(Region) %&gt;%
+  summarise(difference = &quot;Mid-Career Median Salary&quot; - &quot;Starting Median Salary&quot;) </code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gZnVuY3Rpb25fbGlzdFtbaV1dKHZhbHVlKSA6IFxuICAobGlzdCkgb2JqZWN0IGNhbm5vdCBiZSBjb2VyY2VkIHRvIHR5cGUgJ2RvdWJsZSdcbiJ9 -->
+<pre><code>Error in function_list[[i]](value) : 
+  (list) object cannot be coerced to type 'double'</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Describe preliminary observations and intuition about the research question</p>
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiRmluYWwgUHJvamVjdDogT2NjY3VwYXRpb25zIgpuYW1lczogIkxpbHkgSmFraWVsYXN6ZWssIEFsbGlzb24gRGVuZW5iZXJnLCBBeW9vbHdhdG9taXdhIE9ndW5yb21iaSIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKIyMjIExvYWQgdGhlIExpYnJhcmllcyAKYGBge3J9CmxpYnJhcnkoRGF0YUNvbXB1dGluZykKbGlicmFyeShsdWJyaWRhdGUpCmxpYnJhcnkodGlkeXZlcnNlKQpgYGAKCiMjIyBMb2FkIHRoZSBNYWluIERhdGFzZXQgZnJvbSBPdXRzaWRlIFNvdXJjZQpgYGB7cn0KT2NjdXBhdGlvblByb2plY3Rpb24gPC0gcmVhZC5jc3YoImh0dHBzOi8vcXVlcnkuZGF0YS53b3JsZC9zL2hmZ2YzbG9xenpiazM0YXl0Z2h2bmU1c3hnM2xqciIsIGhlYWRlcj1UUlVFLCBzdHJpbmdzQXNGYWN0b3JzPUZBTFNFKTsKT2NjdXBhdGlvblByb2plY3Rpb24KYGBgCiMjIyBMb2FkIERhdGFzZXQgZnJvbSBSIHBhY2thZ2UgCmBgYHtyfQpzYWxhcmllc19ieV9yZWdpb24gPSByZWFkcjo6cmVhZF9jc3YoInNhbGFyaWVzLWJ5LXJlZ2lvbi5jc3YiKQpzYWxhcmllc19ieV9jb2xsZWdlX3R5cGUgPSByZWFkcjo6cmVhZF9jc3YoInNhbGFyaWVzLWJ5LWNvbGxlZ2UtdHlwZS5jc3YiKQpkZWdyZWVzX3RoYXRfcGF5X2JhY2sgPSByZWFkcjo6cmVhZF9jc3YoImRlZ3JlZXMtdGhhdC1wYXktYmFjay5jc3YiKQpgYGAKIyMjIFJlc2VhcmNoIFF1ZXN0aW9uCldoYXQgb2NjdXBhdGlvbnMgYW5kIG1ham9ycyBieSBzdGF0ZSB3aWxsIGhhdmUgdGhlIGhpZ2hlc3Qgc2FsYXJ5IGFuZCBoYXZlIHRoZSBncmVhdGVzdCBmdXR1cmUgb3V0bG9vaz8KCiMjIyBCZWNvbWluZyBBY3F1YWludGVkIHdpdGggdGhlIERhdGFzZXQgCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiRmluYWwgUHJvamVjdDogT2NjY3VwYXRpb25zIgpuYW1lczogIkxpbHkgSmFraWVsYXN6ZWssIEFsbGlzb24gRGVuZW5iZXJnLCBBeW9vbHdhdG9taXdhIE9ndW5yb21iaSIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKIyMjIExvYWQgdGhlIExpYnJhcmllcyAKYGBge3J9CmxpYnJhcnkoRGF0YUNvbXB1dGluZykKbGlicmFyeShsdWJyaWRhdGUpCmxpYnJhcnkodGlkeXZlcnNlKQpgYGAKCiMjIyBMb2FkIHRoZSBNYWluIERhdGFzZXQgZnJvbSBPdXRzaWRlIFNvdXJjZQpgYGB7cn0KT2NjdXBhdGlvblByb2plY3Rpb24gPC0gcmVhZC5jc3YoImh0dHBzOi8vcXVlcnkuZGF0YS53b3JsZC9zL2hmZ2YzbG9xenpiazM0YXl0Z2h2bmU1c3hnM2xqciIsIGhlYWRlcj1UUlVFLCBzdHJpbmdzQXNGYWN0b3JzPUZBTFNFKTsKT2NjdXBhdGlvblByb2plY3Rpb24KYGBgCiMjIyBMb2FkIERhdGFzZXQgZnJvbSBSIHBhY2thZ2UgCmBgYHtyfQpzYWxhcmllc19ieV9yZWdpb24gPSByZWFkcjo6cmVhZF9jc3YoInNhbGFyaWVzLWJ5LXJlZ2lvbi5jc3YiKQpzYWxhcmllc19ieV9jb2xsZWdlX3R5cGUgPSByZWFkcjo6cmVhZF9jc3YoInNhbGFyaWVzLWJ5LWNvbGxlZ2UtdHlwZS5jc3YiKQpkZWdyZWVzX3RoYXRfcGF5X2JhY2sgPSByZWFkcjo6cmVhZF9jc3YoImRlZ3JlZXMtdGhhdC1wYXktYmFjay5jc3YiKQpgYGAKIyMjIFJlc2VhcmNoIFF1ZXN0aW9uCldoYXQgb2NjdXBhdGlvbnMgYW5kIG1ham9ycyBieSBzdGF0ZSB3aWxsIGhhdmUgdGhlIGhpZ2hlc3Qgc2FsYXJ5IGFuZCBoYXZlIHRoZSBncmVhdGVzdCBmdXR1cmUgb3V0bG9vaz8KCiMjIyBCZWNvbWluZyBBY3F1YWludGVkIHdpdGggdGhlIERhdGFzZXQgCjEuIFdoZXJlIGRpZCB5b3UgZmluZCB0aGVtPwoKVGhlIGZpcnN0IGRhdGFzZXQgd2FzIGZvdW5kIG9uIERhdGEuV29ybGQsIHRoZSBvdGhlciB0aHJlZSBkYXRhc2V0cyB3ZXJlIGZvdW5kIG9uIEthZ2dsZS4gCgoyLiBXaG8gY29sbGVjdGVkL21haW50YWlucyB0aGVtPwoKVGhlIGRhdGEgZnJvbSBEYXRhLldvcmxkIHN3YXMgY29sbGVjdGVkIGFuZCB1cGRhdGVkIGJ5IEouIEFsYmVydCBCb3dkZW4gSUkgClRoZSBkYXRhIGZyb20gS2FnZ2xlIHNheXMgdGhhdCBhbGwgZGF0YSB3YXMgb2J0YWluZWQgZnJvbSB0aGUgV2FsbCBTdHJlZXQgSm91cm5hbCBiYXNlZCBvbiBkYXRhIGZyb20gUGF5c2NhbGUsIEluYyAzIHllYXJzIGFnbwoKMy4gV2hlbiAmIFdoeSB3ZXJlIHRoZXkgb3JpZ2luYWxseSBjb2xsZWN0ZWQ/CgpCb3RoIGRhdGFzZXRzIHdlcmUgY3JlYXRlZCAzIHllYXJzIGFnbyBhbmQgYm90aCBoYWQgdXBkYXRlcyBvbmx5IDMgeWVhcnMgYWdvIGFzIHdlbGwuCkZvciB0aGUgRGF0YS5Xb3JsZCBkYXRhc2V0LCBpdCB3YXMgbWFkZSB0byBpbmZvcm1lZCBjYXJlZXIgZGVjaXNpb25zIApGb3IgdGhlIEthZ2dsZSBzYWxhcmllcyBieSByZWdpb24gZGF0YXNldCwgaXQgd2FzIG1hZGUgdG8gbG9vayBhdCBzY2hvb2xzIGFuZCByZWdpb25zIHNhbGFyaWVzIGJ5IG1pZC1jYXJlZXIuCkZvciB0aGUgS2FnZ2xlIHNhbGFyaWVzIGJ5IGNvbGxlZ2VfdHlwZSBkYXRhc2V0LCBpdCB3YXMgbWFkZSB0byBjb21wYXJlIHJhbmtpbmdzIG9mIHR5cGUgb2YgY29sbGVnZXMgeW91IGF0dGVuZGVkIChpdnkgbGVhZ3VlLCBlbmdlZW5lcmluZyBzY2hvb2wpCkZvciB0aGUgS2FnZ2xlIGRlZ3JlZXMgdGhhdCBwYXkgYmFjayBkYXRhc2V0LCBpdCB3YXMgbWFkZSB0byBkZWZpbmUgd2hpY2ggbWFqb3JzIG1ha2UgdGhlIG1vc3QgbW9uZXkgCgo0LiBXaGF0IGRvZXMgYSBjYXNlIHJlcHJlc2VudCBpbiBlYWNoIGRhdGEgc291cmNlLCBhbmQgaG93IG1hbnkgdG90YWwgY2FzZXMgYXJlIGF2YWlsYWJsZT8KCjEuIApgYGB7cn0KZ2xpbXBzZShPY2N1cGF0aW9uUHJvamVjdGlvbikKYGBgCkEgY2FzZSByZXByZXNlbnRzIGFuIGFyZWEgc3VjaCBhcyBuYXRpb24gKFVuaXRlZCBTdGF0ZXMpIG9yIHN0YXRlIGFuZCBhbiBvY2N1cGF0aW9uIG5hbWUuIFRoZXJlIGFyZSAzNCw5ODIgY2FzZXMuCjIuCmBgYHtyfQpnbGltcHNlKHNhbGFyaWVzX2J5X3JlZ2lvbikKYGBgCkEgY2FzZSByZXByZXNlbnRzIGEgc2Nob29sIG5hbWUgYW5kIHJlZ2lvbi4gVGhlcmUgYXJlIDMyMCBjYXNlcy4KMy4KYGBge3J9CmdsaW1wc2Uoc2FsYXJpZXNfYnlfY29sbGVnZV90eXBlKQpgYGAKQSBjYXNlIHJlcHJlc2VudHMgYSBzY2hvb2wgbmFtZSBhbmQgc2Nob29sIHR5cGUuIFRoZXJlIGFyZSAyNjkgY2FzZXMuCjQuIApgYGB7cn0KZ2xpbXBzZShkZWdyZWVzX3RoYXRfcGF5X2JhY2spCmBgYApBIGNhc2UgcmVwcmVzZW50cyBhbiB1bmRlcmdyYWR1YXRlIG1ham9yLiBUaGVyZSBhcmUgNTAgY2FzZXMuIAoKNS4gV2hhdCBhcmUgc29tZSBvZiB0aGUgdmFyaWFibGVzIHRoYXQgeW91IHBsYW4gdG8gdXNlCgpXZSBwbGFuIHRvIHVzZSBTY2hvb2wgTmFtZSwgU2Nob29sIFR5cGUsIE1pZC1DYXJlZXIgTWVkaWFuIFNhbGFyeSwgU3RhcnRpbmcgTWVkaWFuIFNhbGFyeSwgUGVyY2VudCBjaGFuZ2UgZnJvbSBTdGFydGluZyB0byBNaWQtQ2FyZWVyIFNhbGFyeSwgUmVnaW9uLCBBcmVhLm5hbWUsIE9jY3VwYXRpb24ubmFtZSwgQmFzZS5ZZWFyLCBQcm9qZWN0ZWQuWWVhciwgQXZlcmFnZS5Bbm51YWwuT3BlbmluZ3MsIFBlcmNlbnQuQ2hhbmdlIAoKV2UgcGxhbiB0byBjb25uZWN0IHNvbWUgb2YgdGhlc2UgZGF0YXNldHMgYnkgdGhlIFN0YXRlIG5hbWUsIGFzIHdlbGwgYXMgdXNlIHNvbWUgZGF0YXNldHMgYWxvbmUuIAoKIyMjIEV4cGxvcmUgaW50dWl0aW9uIHJlbGF0ZWQgdG8gdGhlIHJlc2VhcmNoIHF1ZXN0aW9uCjEuIENyZWF0ZSBzb21lIGluZm9ybWF0aXZlIHBsb3RzIGFuZCBzdW1tYXJ5IHN0YXRpc3RpY3MgCgphLiAKYGBge3J9CnNhbGFyaWVzX2J5X3JlZ2lvbiAlPiUKICBhcy5udW1lcmljKCJNaWQtQ2FyZWVyIE1lZGlhbiBTYWxhcnkiKSAlPiUKICBhcy5udW1lcmljKCJTdGFydGluZyBNZWRpYW4gU2FsYXJ5IikgJT4lCiAgZ3JvdXBfYnkoUmVnaW9uKSAlPiUKICBzdW1tYXJpc2UoZGlmZmVyZW5jZSA9ICJNaWQtQ2FyZWVyIE1lZGlhbiBTYWxhcnkiIC0gIlN0YXJ0aW5nIE1lZGlhbiBTYWxhcnkiKSAKCnNhbGFyaWVzX2J5X3JlZ2lvbgpgYGAKCgpEZXNjcmliZSBwcmVsaW1pbmFyeSBvYnNlcnZhdGlvbnMgYW5kIGludHVpdGlvbiBhYm91dCB0aGUgcmVzZWFyY2ggcXVlc3Rpb24KCg==</div>
 
 
 
