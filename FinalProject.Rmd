@@ -9,6 +9,8 @@ output: html_notebook
 library(DataComputing)
 library(lubridate)
 library(tidyverse)
+library(rvest)
+library(mosaic)
 ```
 
 ### Load the Main Dataset from Outside Source
@@ -100,16 +102,11 @@ We plan to connect some of these datasets by the State name, as well as use some
 
 a. 
 ```{r}
-salaries_by_region %>%
-  mutate(Mid-Career_Median_Salary = as.numeric(`Mid-Career Median Salary`),
-        Starting_Median_Salary = as.numeric(`Starting Median Salary`)) %>%
-  group_by(Region) %>%
-  summarise(difference = "Mid-Career Median Salary" - "Starting Median Salary") 
-
-salaries_by_region
+degrees_that_pay_back%>%
+  ggplot(aes(x=`Undergraduate Major`,y=`Percent change from Starting to Mid-Career Salary`))+geom_point()+theme_bw()
 ```
 
 
-Describe preliminary observations and intuition about the research question
+
 
 
