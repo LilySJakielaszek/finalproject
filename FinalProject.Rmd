@@ -18,9 +18,11 @@ OccupationProjection
 ```
 ### Load Dataset from R package 
 ```{r}
-
+salaries_by_region = readr::read_csv("salaries-by-region.csv")
+salaries_by_college_type = readr::read_csv("salaries-by-college-type.csv")
+degrees_that_pay_back = readr::read_csv("degrees-that-pay-back.csv")
 ```
 ### Research Question
-What occupations make the most money and have the greatest future outlook?
+What occupations and majors by state will have the highest salary and have the greatest future outlook?
 
 ### Becoming Acquainted with the Dataset 

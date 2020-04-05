@@ -260,19 +260,67 @@ OccupationProjection</code></pre>
 <h3>Load Dataset from R package</h3>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2FsYXJpZXNfYnlfcmVnaW9uID0gcmVhZHI6OnJlYWRfY3N2KFwic2FsYXJpZXMtYnktcmVnaW9uLmNzdlwiKVxuYGBgIn0= -->
+<pre class="r"><code>salaries_by_region = readr::read_csv(&quot;salaries-by-region.csv&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUGFyc2VkIHdpdGggY29sdW1uIHNwZWNpZmljYXRpb246XG5jb2xzKFxuICBgU2Nob29sIE5hbWVgID0gXHUwMDFiWzMxbWNvbF9jaGFyYWN0ZXIoKVx1MDAxYlszOW0sXG4gIFJlZ2lvbiA9IFx1MDAxYlszMW1jb2xfY2hhcmFjdGVyKClcdTAwMWJbMzltLFxuICBgU3RhcnRpbmcgTWVkaWFuIFNhbGFyeWAgPSBcdTAwMWJbMzFtY29sX2NoYXJhY3RlcigpXHUwMDFiWzM5bSxcbiAgYE1pZC1DYXJlZXIgTWVkaWFuIFNhbGFyeWAgPSBcdTAwMWJbMzFtY29sX2NoYXJhY3RlcigpXHUwMDFiWzM5bSxcbiAgYE1pZC1DYXJlZXIgMTB0aCBQZXJjZW50aWxlIFNhbGFyeWAgPSBcdTAwMWJbMzFtY29sX2NoYXJhY3RlcigpXHUwMDFiWzM5bSxcbiAgYE1pZC1DYXJlZXIgMjV0aCBQZXJjZW50aWxlIFNhbGFyeWAgPSBcdTAwMWJbMzFtY29sX2NoYXJhY3RlcigpXHUwMDFiWzM5bSxcbiAgYE1pZC1DYXJlZXIgNzV0aCBQZXJjZW50aWxlIFNhbGFyeWAgPSBcdTAwMWJbMzFtY29sX2NoYXJhY3RlcigpXHUwMDFiWzM5bSxcbiAgYE1pZC1DYXJlZXIgOTB0aCBQZXJjZW50aWxlIFNhbGFyeWAgPSBcdTAwMWJbMzFtY29sX2NoYXJhY3RlcigpXHUwMDFiWzM5bVxuKVxuIn0= -->
+<pre><code>Parsed with column specification:
+cols(
+  `School Name` = [31mcol_character()[39m,
+  Region = [31mcol_character()[39m,
+  `Starting Median Salary` = [31mcol_character()[39m,
+  `Mid-Career Median Salary` = [31mcol_character()[39m,
+  `Mid-Career 10th Percentile Salary` = [31mcol_character()[39m,
+  `Mid-Career 25th Percentile Salary` = [31mcol_character()[39m,
+  `Mid-Career 75th Percentile Salary` = [31mcol_character()[39m,
+  `Mid-Career 90th Percentile Salary` = [31mcol_character()[39m
+)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2FsYXJpZXNfYnlfY29sbGVnZV90eXBlID0gcmVhZHI6OnJlYWRfY3N2KFwic2FsYXJpZXMtYnktY29sbGVnZS10eXBlLmNzdlwiKVxuYGBgIn0= -->
+<pre class="r"><code>salaries_by_college_type = readr::read_csv(&quot;salaries-by-college-type.csv&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUGFyc2VkIHdpdGggY29sdW1uIHNwZWNpZmljYXRpb246XG5jb2xzKFxuICBgU2Nob29sIE5hbWVgID0gXHUwMDFiWzMxbWNvbF9jaGFyYWN0ZXIoKVx1MDAxYlszOW0sXG4gIGBTY2hvb2wgVHlwZWAgPSBcdTAwMWJbMzFtY29sX2NoYXJhY3RlcigpXHUwMDFiWzM5bSxcbiAgYFN0YXJ0aW5nIE1lZGlhbiBTYWxhcnlgID0gXHUwMDFiWzMxbWNvbF9jaGFyYWN0ZXIoKVx1MDAxYlszOW0sXG4gIGBNaWQtQ2FyZWVyIE1lZGlhbiBTYWxhcnlgID0gXHUwMDFiWzMxbWNvbF9jaGFyYWN0ZXIoKVx1MDAxYlszOW0sXG4gIGBNaWQtQ2FyZWVyIDEwdGggUGVyY2VudGlsZSBTYWxhcnlgID0gXHUwMDFiWzMxbWNvbF9jaGFyYWN0ZXIoKVx1MDAxYlszOW0sXG4gIGBNaWQtQ2FyZWVyIDI1dGggUGVyY2VudGlsZSBTYWxhcnlgID0gXHUwMDFiWzMxbWNvbF9jaGFyYWN0ZXIoKVx1MDAxYlszOW0sXG4gIGBNaWQtQ2FyZWVyIDc1dGggUGVyY2VudGlsZSBTYWxhcnlgID0gXHUwMDFiWzMxbWNvbF9jaGFyYWN0ZXIoKVx1MDAxYlszOW0sXG4gIGBNaWQtQ2FyZWVyIDkwdGggUGVyY2VudGlsZSBTYWxhcnlgID0gXHUwMDFiWzMxbWNvbF9jaGFyYWN0ZXIoKVx1MDAxYlszOW1cbilcbiJ9 -->
+<pre><code>Parsed with column specification:
+cols(
+  `School Name` = [31mcol_character()[39m,
+  `School Type` = [31mcol_character()[39m,
+  `Starting Median Salary` = [31mcol_character()[39m,
+  `Mid-Career Median Salary` = [31mcol_character()[39m,
+  `Mid-Career 10th Percentile Salary` = [31mcol_character()[39m,
+  `Mid-Career 25th Percentile Salary` = [31mcol_character()[39m,
+  `Mid-Career 75th Percentile Salary` = [31mcol_character()[39m,
+  `Mid-Career 90th Percentile Salary` = [31mcol_character()[39m
+)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGVncmVlc190aGF0X3BheV9iYWNrID0gcmVhZHI6OnJlYWRfY3N2KFwiZGVncmVlcy10aGF0LXBheS1iYWNrLmNzdlwiKVxuYGBgIn0= -->
+<pre class="r"><code>degrees_that_pay_back = readr::read_csv(&quot;degrees-that-pay-back.csv&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUGFyc2VkIHdpdGggY29sdW1uIHNwZWNpZmljYXRpb246XG5jb2xzKFxuICBgVW5kZXJncmFkdWF0ZSBNYWpvcmAgPSBcdTAwMWJbMzFtY29sX2NoYXJhY3RlcigpXHUwMDFiWzM5bSxcbiAgYFN0YXJ0aW5nIE1lZGlhbiBTYWxhcnlgID0gXHUwMDFiWzMxbWNvbF9jaGFyYWN0ZXIoKVx1MDAxYlszOW0sXG4gIGBNaWQtQ2FyZWVyIE1lZGlhbiBTYWxhcnlgID0gXHUwMDFiWzMxbWNvbF9jaGFyYWN0ZXIoKVx1MDAxYlszOW0sXG4gIGBQZXJjZW50IGNoYW5nZSBmcm9tIFN0YXJ0aW5nIHRvIE1pZC1DYXJlZXIgU2FsYXJ5YCA9IFx1MDAxYlszMm1jb2xfZG91YmxlKClcdTAwMWJbMzltLFxuICBgTWlkLUNhcmVlciAxMHRoIFBlcmNlbnRpbGUgU2FsYXJ5YCA9IFx1MDAxYlszMW1jb2xfY2hhcmFjdGVyKClcdTAwMWJbMzltLFxuICBgTWlkLUNhcmVlciAyNXRoIFBlcmNlbnRpbGUgU2FsYXJ5YCA9IFx1MDAxYlszMW1jb2xfY2hhcmFjdGVyKClcdTAwMWJbMzltLFxuICBgTWlkLUNhcmVlciA3NXRoIFBlcmNlbnRpbGUgU2FsYXJ5YCA9IFx1MDAxYlszMW1jb2xfY2hhcmFjdGVyKClcdTAwMWJbMzltLFxuICBgTWlkLUNhcmVlciA5MHRoIFBlcmNlbnRpbGUgU2FsYXJ5YCA9IFx1MDAxYlszMW1jb2xfY2hhcmFjdGVyKClcdTAwMWJbMzltXG4pXG4ifQ== -->
+<pre><code>Parsed with column specification:
+cols(
+  `Undergraduate Major` = [31mcol_character()[39m,
+  `Starting Median Salary` = [31mcol_character()[39m,
+  `Mid-Career Median Salary` = [31mcol_character()[39m,
+  `Percent change from Starting to Mid-Career Salary` = [32mcol_double()[39m,
+  `Mid-Career 10th Percentile Salary` = [31mcol_character()[39m,
+  `Mid-Career 25th Percentile Salary` = [31mcol_character()[39m,
+  `Mid-Career 75th Percentile Salary` = [31mcol_character()[39m,
+  `Mid-Career 90th Percentile Salary` = [31mcol_character()[39m
+)</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
 <div id="research-question" class="section level3">
 <h3>Research Question</h3>
-<p>What occupations make the most money and have the greatest future outlook?</p>
+<p>What occupations and majors by state will have the highest salary and have the greatest future outlook?</p>
 </div>
 <div id="becoming-acquainted-with-the-dataset" class="section level3">
 <h3>Becoming Acquainted with the Dataset</h3>
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiRmluYWwgUHJvamVjdDogT2NjY3VwYXRpb25zIgpuYW1lczogIkxpbHkgSmFraWVsYXN6ZWssIEFsbGlzb24gRGVuZW5iZXJnLCBBeW9vbHdhdG9taXdhIE9ndW5yb21iaSIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKIyMjIExvYWQgdGhlIExpYnJhcmllcyAKYGBge3J9CmxpYnJhcnkoRGF0YUNvbXB1dGluZykKbGlicmFyeShsdWJyaWRhdGUpCmxpYnJhcnkodGlkeXZlcnNlKQpgYGAKCiMjIyBMb2FkIHRoZSBNYWluIERhdGFzZXQgZnJvbSBPdXRzaWRlIFNvdXJjZQpgYGB7cn0KT2NjdXBhdGlvblByb2plY3Rpb24gPC0gcmVhZC5jc3YoImh0dHBzOi8vcXVlcnkuZGF0YS53b3JsZC9zL2hmZ2YzbG9xenpiazM0YXl0Z2h2bmU1c3hnM2xqciIsIGhlYWRlcj1UUlVFLCBzdHJpbmdzQXNGYWN0b3JzPUZBTFNFKTsKT2NjdXBhdGlvblByb2plY3Rpb24KYGBgCiMjIyBMb2FkIERhdGFzZXQgZnJvbSBSIHBhY2thZ2UgCmBgYHtyfQoKYGBgCiMjIyBSZXNlYXJjaCBRdWVzdGlvbgpXaGF0IG9jY3VwYXRpb25zIG1ha2UgdGhlIG1vc3QgbW9uZXkgYW5kIGhhdmUgdGhlIGdyZWF0ZXN0IGZ1dHVyZSBvdXRsb29rPwoKIyMjIEJlY29taW5nIEFjcXVhaW50ZWQgd2l0aCB0aGUgRGF0YXNldCAK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiRmluYWwgUHJvamVjdDogT2NjY3VwYXRpb25zIgpuYW1lczogIkxpbHkgSmFraWVsYXN6ZWssIEFsbGlzb24gRGVuZW5iZXJnLCBBeW9vbHdhdG9taXdhIE9ndW5yb21iaSIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKIyMjIExvYWQgdGhlIExpYnJhcmllcyAKYGBge3J9CmxpYnJhcnkoRGF0YUNvbXB1dGluZykKbGlicmFyeShsdWJyaWRhdGUpCmxpYnJhcnkodGlkeXZlcnNlKQpgYGAKCiMjIyBMb2FkIHRoZSBNYWluIERhdGFzZXQgZnJvbSBPdXRzaWRlIFNvdXJjZQpgYGB7cn0KT2NjdXBhdGlvblByb2plY3Rpb24gPC0gcmVhZC5jc3YoImh0dHBzOi8vcXVlcnkuZGF0YS53b3JsZC9zL2hmZ2YzbG9xenpiazM0YXl0Z2h2bmU1c3hnM2xqciIsIGhlYWRlcj1UUlVFLCBzdHJpbmdzQXNGYWN0b3JzPUZBTFNFKTsKT2NjdXBhdGlvblByb2plY3Rpb24KYGBgCiMjIyBMb2FkIERhdGFzZXQgZnJvbSBSIHBhY2thZ2UgCmBgYHtyfQpzYWxhcmllc19ieV9yZWdpb24gPSByZWFkcjo6cmVhZF9jc3YoInNhbGFyaWVzLWJ5LXJlZ2lvbi5jc3YiKQpzYWxhcmllc19ieV9jb2xsZWdlX3R5cGUgPSByZWFkcjo6cmVhZF9jc3YoInNhbGFyaWVzLWJ5LWNvbGxlZ2UtdHlwZS5jc3YiKQpkZWdyZWVzX3RoYXRfcGF5X2JhY2sgPSByZWFkcjo6cmVhZF9jc3YoImRlZ3JlZXMtdGhhdC1wYXktYmFjay5jc3YiKQpgYGAKIyMjIFJlc2VhcmNoIFF1ZXN0aW9uCldoYXQgb2NjdXBhdGlvbnMgYW5kIG1ham9ycyBieSBzdGF0ZSB3aWxsIGhhdmUgdGhlIGhpZ2hlc3Qgc2FsYXJ5IGFuZCBoYXZlIHRoZSBncmVhdGVzdCBmdXR1cmUgb3V0bG9vaz8KCiMjIyBCZWNvbWluZyBBY3F1YWludGVkIHdpdGggdGhlIERhdGFzZXQgCg==</div>
 
 
 
