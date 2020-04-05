@@ -11,13 +11,16 @@ library(lubridate)
 library(tidyverse)
 ```
 
-### Load the Datasets
+### Load the Main Dataset from Outside Source
 ```{r}
-data()
+OccupationProjection <- read.csv("https://query.data.world/s/hfgf3loqzzbk34aytghvne5sxg3ljr", header=TRUE, stringsAsFactors=FALSE);
+OccupationProjection
 ```
+### Load Dataset from R package 
+```{r}
 
+```
 ### Research Question
 What occupations make the most money and have the greatest future outlook?
 
-### Becoming Acquainted with the Dataset
-
+### Becoming Acquainted with the Dataset 
