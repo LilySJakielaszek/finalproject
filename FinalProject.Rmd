@@ -114,8 +114,32 @@ OccupationProjection
 ```{r}
 ggplot(data=OccupationProjection,aes(x=Occupation.Name,y=Average.Annual.Openings ))+geom_bar(stat='identity',position='stack', width=.9)+theme_bw()
 ```
+Shows the top three majors with the highest percent change from starting to mid career salary.
+```{r}
+degrees_that_pay_back %>%
+  arrange(desc(`Percent change from Starting to Mid-Career Salary`)) %>%
+  head(3)
+```
 
+Shows three occupations with the highest percentage changes 
+```{r}
+OccupationProjection %>%
+  arrange(desc(Percent.Change)) %>%
+  select(Area.Name, Occupation.Name, Percent.Change) %>%
+  head(3)
+```
 
+Show that we can change the character strings into numerics and then find a difference between Mid-Career salary and Starting Career salary.
+```{r}
+salaries_by_region <-
+  salaries_by_region %>%
+  mutate(Mid_Career_Median_Salary = as.numeric(gsub('\\$|,', '', `Mid-Career Median Salary`)),
+         Starting_Median_Salary = as.numeric(gsub('\\$|,', '', `Starting Median Salary`)),
+         Difference = Mid_Career_Median_Salary - Starting_Median_Salary)
+
+salaries_by_region %>%
+  select(Mid_Career_Median_Salary, Starting_Median_Salary, Difference)
+```
 
 
 
