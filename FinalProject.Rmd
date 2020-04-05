@@ -26,6 +26,7 @@ salaries_by_college_type = readr::read_csv("salaries-by-college-type.csv")
 degrees_that_pay_back = readr::read_csv("degrees-that-pay-back.csv")
 ```
 ### Research Question
+
 What occupations and majors by state will have the highest salary and have the greatest future outlook?
 
 ### Quick Look at the Datasets
@@ -141,5 +142,8 @@ salaries_by_region %>%
   select(Mid_Career_Median_Salary, Starting_Median_Salary, Difference)
 ```
 
+#### Intuition About Research Question
+
+By looking at the datasets, we can hypothesize that we will most likely see majors Math, Philisophy, and International Relations in the conclusions as having the best future outlook based on salary. We can also infer that our focus state will be California because it had the highest percent change in expected growth for occupations. 
 
 
