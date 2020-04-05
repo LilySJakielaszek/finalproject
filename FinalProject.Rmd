@@ -13,13 +13,13 @@ library(rvest)
 library(mosaic)
 ```
 
-### Load the Main Dataset from Outside Source
+### Load the Main Dataset from Data.World
 ```{r}
 OccupationProjection <- read.csv("https://query.data.world/s/hfgf3loqzzbk34aytghvne5sxg3ljr", header=TRUE, stringsAsFactors=FALSE);
 OccupationProjection<-OccupationProjection%>%
   filter(Occupation.Name!="Total, All Occupations")
 ```
-### Load Dataset from R package 
+### Load Datasets from Kaggle 
 ```{r}
 salaries_by_region = readr::read_csv("salaries-by-region.csv")
 salaries_by_college_type = readr::read_csv("salaries-by-college-type.csv")
@@ -70,22 +70,24 @@ For the Kaggle salaries by college_type dataset, it was made to compare rankings
 For the Kaggle degrees that pay back dataset, it was made to define which majors make the most money 
 
 4. What does a case represent in each data source, and how many total cases are available?
-
 1. 
 ```{r}
 glimpse(OccupationProjection)
 ```
 A case represents an area such as nation (United States) or state and an occupation name. There are 34,982 cases.
+
 2.
 ```{r}
 glimpse(salaries_by_region)
 ```
 A case represents a school name and region. There are 320 cases.
+
 3.
 ```{r}
 glimpse(salaries_by_college_type)
 ```
 A case represents a school name and school type. There are 269 cases.
+
 4. 
 ```{r}
 glimpse(degrees_that_pay_back)
