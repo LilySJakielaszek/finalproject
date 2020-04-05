@@ -16,7 +16,7 @@ library(mosaic)
 ### Load the Main Dataset from Outside Source
 ```{r}
 OccupationProjection <- read.csv("https://query.data.world/s/hfgf3loqzzbk34aytghvne5sxg3ljr", header=TRUE, stringsAsFactors=FALSE);
-OccupationProjection%>%
+OccupationProjection<-OccupationProjection%>%
   filter(Occupation.Name!="Total, All Occupations")
 ```
 ### Load Dataset from R package 
@@ -104,6 +104,15 @@ a.
 ```{r}
 degrees_that_pay_back%>%
   ggplot(aes(x=`Undergraduate Major`,y=`Percent change from Starting to Mid-Career Salary`))+geom_point()+theme_bw()
+```
+```{r}
+OccupationProjection<-OccupationProjection%>%
+  filter(Average.Annual.Openings>=20000)
+OccupationProjection
+```
+
+```{r}
+ggplot(data=OccupationProjection,aes(x=Occupation.Name,y=Average.Annual.Openings ))+geom_bar(stat='identity',position='stack', width=.9)+theme_bw()
 ```
 
 
