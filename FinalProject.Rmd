@@ -1,9 +1,10 @@
 ---
 title: "Final Project: Occcupations"
-names: "Lily Jakielaszek, Allison Denenberg, Ayoolwatomiwa Ogunrombi"
+name: "Lily Jakielaszek, Allison Denenberg, Ayoolwatomiwa Ogunrombi"
 output: html_notebook
 ---
 
+### Names: Lily Jakielaszek, Allison Denenberg, Ayoolwatomiwa Ogunrombi
 ### Load the Libraries 
 ```{r}
 library(DataComputing)
