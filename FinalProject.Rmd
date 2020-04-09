@@ -107,7 +107,7 @@ We plan to connect some of these datasets by the State name, as well as use some
 a. 
 ```{r}
 degrees_that_pay_back%>%
-  ggplot(aes(x=`Undergraduate Major`,y=`Percent change from Starting to Mid-Career Salary`))+geom_point()+theme_bw()
+  ggplot(aes(x=`Undergraduate Major`,y=`Percent change from Starting to Mid-Career Salary`))+geom_point()+theme_bw() + theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 ```{r}
 OccupationProjection<-OccupationProjection%>%
@@ -116,7 +116,7 @@ OccupationProjection
 ```
 
 ```{r}
-ggplot(data=OccupationProjection,aes(x=Occupation.Name,y=Average.Annual.Openings ))+geom_bar(stat='identity',position='stack', width=.9)+theme_bw()
+ggplot(data=OccupationProjection,aes(x=Occupation.Name,y=Average.Annual.Openings ))+geom_bar(stat='identity',position='stack', width=.9)+theme_bw() +theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 Shows the top three majors with the highest percent change from starting to mid career salary.
 ```{r}
@@ -143,10 +143,14 @@ salaries_by_region <-
 
 salaries_by_region %>%
   select(Mid_Career_Median_Salary, Starting_Median_Salary, Difference)
+
+parse_number(sal)
 ```
 
 #### Intuition About Research Question
 
 By looking at the datasets, we can hypothesize that we will most likely see majors Math, Philisophy, and International Relations in the conclusions as having the best future outlook based on salary. We can also infer that our focus state will be California because it had the highest percent change in expected growth for occupations. 
+
+
 
 
