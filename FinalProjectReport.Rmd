@@ -1,0 +1,54 @@
+---
+title: "Final Project Report"
+authors: "Lily Jakielaszek, Allison Denenberg, Ayoolwatomiwa Ogunrombi"
+output: html_notebook
+---
+
+### Data Access 
+
+(A) .Rmd Line numbers where at least two different data sources are imported:
+1. FinalProjectRMD = Lines 19-21 for OccupationProjections from Data.World, lines 25-27 for three datasets from Kaggle
+2. FinalProjectData RMD = Lines 16-19 for Data.World dataset, lines 21-25 for three datasets from Kaggle
+(B) .Rmd Line numbers for inspecting data intake:
+1. FinalProject RMD = Lines 35-53 for all four datasets nrow and ncol/ lines 76-97 for all four datasets glimpse and stating the number of cases in each dataset
+2. FinalProjectData RMD = Lines 103-108 for str,nrow,head,tail for OccupationProjections, Lines 111-116 for str,nrow,head,tail for DegreesThatPayBack, Lines 119-124 for str,nrow,head,tail for SalariesByCollegeType, Lines 127-132 for str,nrow,head,tail for SalariesByRegion
+
+### Data Wrangling
+
+(A) .Rmd Line number(s) for general data wrangling:
+(B) .Rmd Line number(s) for a join operation:
+(D) .Rmd Line number(s) for use of regular expressions:
+(E) .Rmd Line number(s) for use of reduction and/or transformation functions: 
+(F) .Rmd Line number(s) for use of user-defined functions:
+
+### Data Visualization
+
+(A) .Rmd Line number(s) for use of mulitple different geoms:
+(B) .Rmd Line number(s) for use of multiple aesthetics:
+(C) .Rmd Line number(s) for use of layered graphics:
+
+### For us only delete later
+(A) All data visualizations must be relevant to the stated research question, and the report must include at
+least one effective display of many–at least 3–variables
+
+(B) Code quality: Code formatting is consistent with Style Guide Appendix of DataComputing eBook.
+Specifically, all code chunks demonstrate proficiency with (1) meaningful object names (2) proper use
+of white space especially with respect to infix operators, chain operators, commas, brackets/parens, etc (3) use of <- assignment operator throughout (4) use of meaningful comments.
+
+(C) Narrative quality: The narrative text (1) clearly states one research question that motivates the overall
+analysis, (2) explains reasoning for each significant step in the analysis and it’s relationship to the
+research question, (3) explains significant findings and conclusions as they relate to the research question,
+and (4) is completely free of errors in spelling and grammar
+
+(D) Overall Quality: Submitted project shows significant effort to produce a high-quality and thoughtful
+analysis that showcases STAT 184 skills. (2) The project must be self-contained, such that the analysis
+can be entirely rerun without errors. (3) Analysis is coherent, well-organized, and free of extraneous
+content such as data dumps, unrelated graphs, and other content that is not overtly connected to the
+research question.
+
+(E) EXTRA CREDIT (1) Project is submitted as a self-contained GitHub Repo (2) project submission is a
+functioning github.io webpage generated for the project Repo. Note: a link to the GitHub Repo itself
+will be awarded partial credit, but does not itself qualify as a “webpage” of the analysis.
+
+
+
