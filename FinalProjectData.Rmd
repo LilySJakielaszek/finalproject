@@ -24,6 +24,10 @@ salaries_by_college_type = readr::read_csv("salaries-by-college-type.csv")
 
 degrees_that_pay_back = readr::read_csv("degrees-that-pay-back.csv")
 ```
+# Research Question
+
+What occupations and majors by state will have the highest salary and have the greatest future outlook?
+
 ## Make New Datasets
 
 These datasets will be the ones that will be used to perform statistics on and joins on. They are renamed from the original datasets and include all the same information except they have R acceptable variable names and the correct type for the their output. 
@@ -128,5 +132,10 @@ str(SalariesByRegion)
 head(SalariesByRegion)
 tail(SalariesByRegion)
 nrow(SalariesByRegion)
+```
+
+### Join Datasets Together 
+```{r}
+
 ```
 
