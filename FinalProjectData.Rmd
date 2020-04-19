@@ -97,4 +97,36 @@ OccupationProjection <-
   select(State_FIPS, Area_Name, Occupation_Code, Occupation_Name, Base_Year, Starting_Median_Salary, Projected_Year, Mid_Career_Median_Salary, Change, Percent_Change_From_Starting_To_MidCareer_Salary, Average_Annual_Openings)
 OccupationProjection
 ```
+### Inspecting the Revised Datasets 
+## OccupationProjection Inspection
+```{r}
+str(OccupationProjection)
+head(OccupationProjection)
+tail(OccupationProjection)
+nrow(OccupationProjection)
+```
+
+## DegreesThatPayBack Inspection
+```{r}
+str(DegreesThatPayBack)
+head(DegreesThatPayBack)
+tail(DegreesThatPayBack)
+nrow(DegreesThatPayBack)
+```
+
+## SalariesByCollegeType Inspection
+```{r}
+str(SalariesByCollegeType)
+head(SalariesByCollegeType)
+tail(SalariesByCollegeType)
+nrow(SalariesByCollegeType)
+```
+
+## SalariesByRegion Inspection
+```{r}
+str(SalariesByRegion)
+head(SalariesByRegion)
+tail(SalariesByRegion)
+nrow(SalariesByRegion)
+```
 
