@@ -1,0 +1,82 @@
+---
+title: "FinalProjectData"
+authors: "Lily Jakielaszek, Allison Denenberg, Ayoolwatomiwa Ogunrombi"
+output: html_notebook
+---
+
+### Load the Libraries and Datasets
+```{r}
+library(DataComputing)
+library(lubridate)
+library(tidyverse)
+library(rvest)
+library(mosaic)
+OccupationProjection <- read.csv("https://query.data.world/s/hfgf3loqzzbk34aytghvne5sxg3ljr", header=TRUE, stringsAsFactors=FALSE);
+
+OccupationProjection<-OccupationProjection%>%
+  filter(Occupation.Name!="Total, All Occupations")
+
+salaries_by_region = readr::read_csv("salaries-by-region.csv")
+
+salaries_by_college_type = readr::read_csv("salaries-by-college-type.csv")
+
+degrees_that_pay_back = readr::read_csv("degrees-that-pay-back.csv")
+```
+## Make New Datasets
+
+These datasets will be the ones that will be used to perform statistics on and joins on. They are renamed from the original datasets and include all the same information except they have R acceptable variable names and the correct type for the their output. 
+
+```{r}
+SalariesByRegion <-
+  salaries_by_region %>%
+  mutate(School_Name = `School Name`,
+         Mid_Career_Median_Salary = as.numeric(gsub('\\$|,', '', `Mid-Career Median Salary`)),
+         Starting_Median_Salary = as.numeric(gsub('\\$|,', '', `Starting Median Salary`)),
+         Mid_Career_10th_Percentile_Salary = as.numeric(gsub('\\$|,', '', `Mid-Career 10th Percentile Salary`)),
+         Mid_Career_25th_Percentile_Salary = as.numeric(gsub('\\$|,', '', `Mid-Career 25th Percentile Salary`)),
+         Mid_Career_75th_Percentile_Salary = as.numeric(gsub('\\$|,', '', `Mid-Career 75th Percentile Salary`)),
+         Mid_Career_90th_Percentile_Salary = as.numeric(gsub('\\$|,', '', `Mid-Career 90th Percentile Salary`)),
+         Difference = Mid_Career_Median_Salary - Starting_Median_Salary) 
+SalariesByRegion[, !(colnames(SalariesByRegion) %in% c(`Mid-Career 90th Percentile Salary`, `Mid-Career 75th Percentile Salary`, `Mid-Career 25th Percentile Salary`, `Mid-Career 10th Percentile Salary`, `School Name`))]
+SalariesByRegion
+```
+```{r}
+SalariesByCollegeType <-
+  salaries_by_college_type %>%
+  mutate(School_Name = `School Name`,
+         School_Type = `School Type`,
+         Mid_Career_Median_Salary = as.numeric(gsub('\\$|,', '', `Mid-Career Median Salary`)),
+         Starting_Median_Salary = as.numeric(gsub('\\$|,', '', `Starting Median Salary`)),
+         Mid_Career_10th_Percentile_Salary = as.numeric(gsub('\\$|,', '', `Mid-Career 10th Percentile Salary`)),
+         Mid_Career_25th_Percentile_Salary = as.numeric(gsub('\\$|,', '', `Mid-Career 25th Percentile Salary`)),
+         Mid_Career_75th_Percentile_Salary = as.numeric(gsub('\\$|,', '', `Mid-Career 75th Percentile Salary`)),
+         Mid_Career_90th_Percentile_Salary = as.numeric(gsub('\\$|,', '', `Mid-Career 90th Percentile Salary`)),
+         Difference = Mid_Career_Median_Salary - Starting_Median_Salary)
+SalariesByCollegeType[, !(colnames(SalariesByCollegeType) %in% c(`Mid-Career 90th Percentile Salary`, `Mid-Career 75th Percentile Salary`, `Mid-Career 25th Percentile Salary`, `Mid-Career 10th Percentile Salary`, `School Name`,`School Type` ))]
+SalariesByCollegeType
+```
+
+```{r}
+DegreesThatPayBack <-
+  degrees_that_pay_back %>%
+  mutate(Undergraduate_Major = `Undergraduate Major`,
+         Mid_Career_Median_Salary = as.numeric(gsub('\\$|,', '', `Mid-Career Median Salary`)),
+         Starting_Median_Salary = as.numeric(gsub('\\$|,', '', `Starting Median Salary`)),
+         Mid_Career_10th_Percentile_Salary = as.numeric(gsub('\\$|,', '', `Mid-Career 10th Percentile Salary`)),
+         Mid_Career_25th_Percentile_Salary = as.numeric(gsub('\\$|,', '', `Mid-Career 25th Percentile Salary`)),
+         Mid_Career_75th_Percentile_Salary = as.numeric(gsub('\\$|,', '', `Mid-Career 75th Percentile Salary`)),
+         Mid_Career_90th_Percentile_Salary = as.numeric(gsub('\\$|,', '', `Mid-Career 90th Percentile Salary`)),
+         Percent_Change_From_Starting_To_MidCareer_Salary = `Percent change from Starting to Mid-Career Salary`,
+         Difference = Mid_Career_Median_Salary - Starting_Median_Salary)
+DegreesThatPayBack[, !(colnames(DegreesThatPayBack) %in% c(`Mid-Career 90th Percentile Salary`, `Mid-Career 75th Percentile Salary`, `Mid-Career 25th Percentile Salary`, `Mid-Career 10th Percentile Salary`, `Percent change from Starting to Mid-Career Salary`,`Undergraduate Major`))]
+DegreesThatPayBack
+```
+```{r}
+OccupationProjection <-
+  OccupationProjection %>%
+  mutate(Staring_Median_Salary = "Base",
+         Mid_Career_Median_Salary = "Projection",
+         Percent_Change_From_Starting_To_MidCareer_Salary = "Percent.Change")
+OccupationProjection
+```
+
