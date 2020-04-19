@@ -5,7 +5,7 @@ output: html_notebook
 ---
 
 ### Data Access 
-
+* Research Question is on Line 29
 (A) .Rmd Line numbers where at least two different data sources are imported:
 1. FinalProjectRMD = Lines 19-21 for OccupationProjections from Data.World, lines 25-27 for three datasets from Kaggle
 2. FinalProjectData RMD = Lines 16-19 for Data.World dataset, lines 21-25 for three datasets from Kaggle
@@ -16,6 +16,8 @@ output: html_notebook
 ### Data Wrangling
 
 (A) .Rmd Line number(s) for general data wrangling:
+Select = Lines 44-45 for SalariesByRegion, Lines 61-62 for SalariesByCollegeType, Lines 79-80 for DegreesThatPayBack, Lines 97-98 for OccupationProjection
+Mutate = Lines 34-41 for SalariesByRegion, Lines 50-58 for SalariesByCollegeType, Lines 68-76 for DegreesThatPayBack, Lines 85-94 for OccupationProjection
 (B) .Rmd Line number(s) for a join operation:
 (D) .Rmd Line number(s) for use of regular expressions:
 (E) .Rmd Line number(s) for use of reduction and/or transformation functions: 
