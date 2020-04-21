@@ -137,6 +137,7 @@ nrow(SalariesByRegion)
 
 ### Evaluating Salaries and Region 
 ```{r}
+<<<<<<< HEAD
 Salaries <-
   SalariesByCollegeType %>%
   full_join(SalariesByRegion) %>%
@@ -148,5 +149,11 @@ LookingAtMedianForStarting <-
   Salaries %>%
   mutate(mean = mean(Starting_Median_Salary)) 
 LookingAtMedianForStarting
+=======
+Salaries<-
+  SalariesByCollegeType%>%
+  full_join(SalariesByRegion) %>%
+  na.omit()
+Salaries
+>>>>>>> 174bae7e31c3d66eebdac78fd6a4a1ac98c49821
 ```
-
