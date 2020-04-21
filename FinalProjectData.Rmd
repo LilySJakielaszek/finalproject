@@ -163,15 +163,29 @@ At this point we can see that California and NorthEastern schools are in the top
 
 Now we will combine these results to find the best school for percent change from starting to mid-career median salary which will show the best school for salary growth over time
 ```{r}
-SchoolSalaries %>%
+percentChange <-
+  SchoolSalaries %>%
   mutate(Percent_Change = ((Mid_Career_Median_Salary - Starting_Median_Salary)/Starting_Median_Salary) * 100) %>%
   select(School_Name, School_Type, Percent_Change) %>%
   arrange(desc(Percent_Change)) %>%
   head(10)
+percentChange
 ```
 
 ## Visualizations on Schools and Salaries 
 
+```{r}
+SchoolSalariesGraphic <-
+  percentChange%>%
+  ggplot(aes(x = reorder(School_Name, -Percent_Change), y = Percent_Change, color = School_Type)) + 
+  geom_point() +
+  xlab("School Name") +
+  ylab("Percent Change") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+SchoolSalariesGraphic
+
+```
 
 
 
@@ -306,4 +320,3 @@ Occupation_Proj_Salary%>%
 From the above analysis, it is clear that the jobs with the highest salaries include, Chief Executives, Dentists, Nurse Anesthetists, Computer and Information Systems Managers, Financial Managers and Architectural and Engineering Managers.
 
 From this analysis it is clear that the jobs that provide the highest job security do not provide the best security financially. 
-
