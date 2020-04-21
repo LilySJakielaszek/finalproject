@@ -91,14 +91,14 @@ OccupationsProjection <-
          Occupation_Code = Occupation.Code,
          Occupation_Name = Occupation.Name,
          Base_Year = Base.Year,
-         Base_Salary = Base,
+         Base = Base,
          Projected_Year = Projected.Year,
-         Projected_Salary = Projection,
+         Projection= Projection,
          Percent_Change = Percent.Change,
          Average_Annual_Openings = Average.Annual.Openings) 
 OccupationsProjection <-
   OccupationsProjection %>%
-  select(State_FIPS, Region, Occupation_Code, Occupation_Name, Base_Year, Base_Salary, Projected_Year, Projected_Salary, Percent_Change, Average_Annual_Openings) 
+  select(State_FIPS, Region, Occupation_Code, Occupation_Name, Base_Year, Base, Projected_Year, Projection, Percent_Change, Average_Annual_Openings) 
 OccupationsProjection
 ```
 ### Inspecting the Revised Datasets 
@@ -224,16 +224,86 @@ From this we can see that Math is best major for average salary growth
 
 With these results we can conclude that the best major if you want the highest starting median salary is Physician Assistant at $74,300, the best major if you want the highest mid-career median salary is Chemical Engineering	at $107,000, and the best major for greatest percent growth from starting to mid-career median salary is Math at 103.5%.
 
-# Third Step in Game Plan: Finding the Occupations with the Highest Salaries 
+# Third Step in Game Plan: Finding the Occupations with the Highest Salaries and Job Security 
 
-We will be using the OccupationProjection dataset for the evaluation of this step in the game plan
+We will be using the OccupationSalaries dataset which we found on a website online for the evaluation of this step in the game plan
 
-First we will look at the occupations with the highest projected salary in 2024
+First we will extract the table from the website online
 ```{r}
-head(OccupationsProjection)
-OccupationsProjection %>%
-  select(Occupation_Name, Projected_Year, Projected_Salary) %>%
-  arrange(desc(Projected_Salary)) %>%
-  head(10)
+web_page<-"https://www.bls.gov/oes/current/oes_nat.htm#00-0000"
+ListofTables<- web_page%>%
+  read_html()%>%
+  html_nodes(css= "table")%>%
+  html_table(fill=TRUE)
+
 ```
+
+Next, we will use data scraping to get the data ready for analysis
+```{r}
+head(ListofTables[[2]])
+OccupationSalaries<-ListofTables[[2]]
+OccupationSalaries<-OccupationSalaries%>%
+  filter(row_number()>2)%>%
+   rename(Code=`Occupation code`,
+          Name=`Occupation title (click on the occupation title to view its profile)`,
+          Level=Level,
+          Employment=Employment,
+          RSE=`Employment RSE`,
+          EP1J=`Employment per 1,000 jobs`,
+          Median=`Median hourly wage`,
+          Mean=`Mean hourly wage`,
+          Annual=`Annual mean wage`,
+          WRSE=`Mean wage RSE`)
+str(OccupationSalaries)
+OccupationSalaries<-OccupationSalaries%>%
+  mutate(Employment=gsub(pattern=',',replacement='',Employment),RSE=gsub(pattern='%',replacement='',RSE),Median=gsub(pattern='\\$',replacement='',Median),Mean=gsub(pattern='\\$',replacement='',Mean),Annual=gsub(pattern='\\$|,',replacement='',Annual),WRSE=gsub(pattern='%',replacement='',WRSE))
+
+OccupationSalaries<-OccupationSalaries%>%
+  mutate(Employment=as.numeric(Employment),RSE=as.numeric(RSE),EP1J=as.numeric(EP1J),Median=as.numeric(Median),Mean=as.numeric(Mean),Annual=as.numeric(Annual),WRSE=as.numeric(WRSE))
+str(OccupationSalaries)
+OccupationSalaries<-na.omit(OccupationSalaries)
+OccupationSalaries
+```
+
+Now we will join the OccupationSalaries dataset to the OccupationProjection dataset so that we can make a full analysis on Occupations
+
+```{r}
+Occupation_Proj_Salary<-OccupationsProjection%>%
+  rename(Name=Occupation_Name, Code=Occupation_Code)%>%
+  full_join(OccupationSalaries)
+Occupation_Proj_Salary<-na.omit(Occupation_Proj_Salary)
+Occupation_Proj_Salary
+```
+
+### Finding Occupations with the best job security
+```{r}
+Occupation_Proj_Salary%>%
+  filter(EP1J>15, Percent_Change>10,Average_Annual_Openings>1000)%>%
+  arrange(desc(Percent_Change))%>%
+  group_by(Name)%>%
+  summarise(Average_Annual_Openings=sum(Average_Annual_Openings))%>%
+  arrange(desc(Average_Annual_Openings))%>%
+  head()
+  
+  
+  
+  
+```
+
+In the above analysis we tried to find the jobs that have the best security. We defined security as having a high upward change in job creation, a high average annual job opening and a high EP1J (Employment per 1000 jobs). As an arbitrary value for high we decided on an EP1J of greater than 15, A annual job openings of greater than 1000 and a high upward change in job creation of greater than 10%. We Thus filtered these jobs out of the data-set and the 6 jobs with the highest security are Registered nurses, Retail Salespersons, Customer Service Representatives, Laborers and Freight and General and Operations Managers. These jobs are not however, the best in terms of Salary. This is what we will analyse next.
+
+### Finding jobs with the highest Salaries
+```{r}
+Occupation_Proj_Salary%>%
+  arrange(desc(Annual))%>%
+  group_by(Name)%>%
+  summarise(AnnualSalary=sum(Annual))%>%
+  arrange(desc(AnnualSalary))%>%
+  head()
+  
+```
+
+From the above analysis, it is clear that the jobs with the highest salaries include, Chief Executives, Dentists, Nurse Anesthetists, Computer and Information Systems Managers, Financial Managers and Architectural and Engineering Managers.
+
+From this analysis it is clear that the jobs that provide the highest job security do not provide the best security financially. 
 
