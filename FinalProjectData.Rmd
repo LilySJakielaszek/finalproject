@@ -168,7 +168,7 @@ percentChange <-
   mutate(Percent_Change = ((Mid_Career_Median_Salary - Starting_Median_Salary)/Starting_Median_Salary) * 100) %>%
   select(School_Name, School_Type, Percent_Change) %>%
   arrange(desc(Percent_Change)) %>%
-  head(10)
+  head(50)
 percentChange
 ```
 
@@ -186,10 +186,6 @@ SchoolSalariesGraphic <-
 SchoolSalariesGraphic
 
 ```
-
-
-
-
 
 
 ### Conclusions on Schools and Salaries 
@@ -221,14 +217,24 @@ From this we can see that the best major for mid-career median salary is Chemica
 
 Now we will look at the top ten majors with the best percentage change from starting to mid-career median salary to see which major offers the best growth in salary
 ```{r}
-DegreesThatPayBack %>%
+DegreesThatPayBack <-
+  DegreesThatPayBack%>%
   select(Undergraduate_Major, Percent_Change_From_Starting_To_MidCareer_Salary) %>%
   arrange(desc(Percent_Change_From_Starting_To_MidCareer_Salary)) %>%
   head(10)
+DegreesThatPayBack
 ```
 From this we can see that Math is best major for average salary growth 
 
 ## Visualization of Majors and Salaries
+
+```{r}
+DegreesThatPayBack %>%
+  ggplot(aes(x = Undergraduate_Major, y = Percent_Change_From_Starting_To_MidCareer_Salary)) +
+  geom_bar() +
+  xlab("Undergraduate Major") +
+  ylab("Percent Change from ")
+```
 
 
 
