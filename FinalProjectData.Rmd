@@ -84,23 +84,22 @@ DegreesThatPayBack <-
 DegreesThatPayBack
 ```
 ```{r}
-OccupationProjection <-
+OccupationsProjection <-
   OccupationProjection %>%
   mutate(State_FIPS = State.FIPS,
          Region = Area.Name,
          Occupation_Code = Occupation.Code,
          Occupation_Name = Occupation.Name,
          Base_Year = Base.Year,
-         Starting_Median_Salary = Base,
+         Base_Salary = Base,
          Projected_Year = Projected.Year,
-         Mid_Career_Median_Salary = Projection,
-         Percent_Change_From_Starting_To_MidCareer_Salary = Percent.Change,
+         Projected_Salary = Projection,
+         Percent_Change = Percent.Change,
          Average_Annual_Openings = Average.Annual.Openings) 
-OccupationProjection <-
-  OccupationProjection %>%
-  select(State_FIPS, Region, Occupation_Code, Occupation_Name, Base_Year, Starting_Median_Salary, Projected_Year, Mid_Career_Median_Salary, Change, Percent_Change_From_Starting_To_MidCareer_Salary, Average_Annual_Openings) %>%
-  filter(Region != " United States")
-OccupationProjection
+OccupationsProjection <-
+  OccupationsProjection %>%
+  select(State_FIPS, Region, Occupation_Code, Occupation_Name, Base_Year, Base_Salary, Projected_Year, Projected_Salary, Percent_Change, Average_Annual_Openings) 
+OccupationsProjection
 ```
 ### Inspecting the Revised Datasets 
 ## OccupationProjection Inspection
@@ -171,6 +170,70 @@ SchoolSalaries %>%
   head(10)
 ```
 
+## Visualizations on Schools and Salaries 
+
+
+
+
+
+
+
+### Conclusions on Schools and Salaries 
+
 We can conclude that the school to pick if you want the highest starting median salary is California Institute of Technology (CIT) with a salary amount of $75,500, the school to pick if you want the highest mid-career median salary is Dartmouth College with a salary amount of $134,000, and the school to pick if you want the best salary growth over time is DartMouth College with a salary percent growth from starting to mid-career median salary of 131.0345%. 
 
+# Second Step in Game Plan: Finding the Majors with the Highest Salaries 
+
+We will be using the DegreesThatPayBack dataset to answer this part of the game plan
+
+First we will look at the top ten majors with the best starting median salary
+```{r}
+head(DegreesThatPayBack)
+DegreesThatPayBack %>%
+  select(Undergraduate_Major, Starting_Median_Salary) %>%
+  arrange(desc(Starting_Median_Salary)) %>%
+  head(10)
+```
+From this we can see that the best major for starting median salary is a Physician Assistant
+
+Now we will look at the top ten majors with the best mid-career median salary
+```{r}
+DegreesThatPayBack %>%
+  select(Undergraduate_Major, Mid_Career_Median_Salary) %>%
+  arrange(desc(Mid_Career_Median_Salary)) %>%
+  head(10)
+```
+From this we can see that the best major for mid-career median salary is Chemical Engineering
+
+Now we will look at the top ten majors with the best percentage change from starting to mid-career median salary to see which major offers the best growth in salary
+```{r}
+DegreesThatPayBack %>%
+  select(Undergraduate_Major, Percent_Change_From_Starting_To_MidCareer_Salary) %>%
+  arrange(desc(Percent_Change_From_Starting_To_MidCareer_Salary)) %>%
+  head(10)
+```
+From this we can see that Math is best major for average salary growth 
+
+## Visualization of Majors and Salaries
+
+
+
+
+
+### Conclusions of Majors and Salaries
+
+With these results we can conclude that the best major if you want the highest starting median salary is Physician Assistant at $74,300, the best major if you want the highest mid-career median salary is Chemical Engineering	at $107,000, and the best major for greatest percent growth from starting to mid-career median salary is Math at 103.5%.
+
+# Third Step in Game Plan: Finding the Occupations with the Highest Salaries 
+
+We will be using the OccupationProjection dataset for the evaluation of this step in the game plan
+
+First we will look at the occupations with the highest projected salary in 2024
+```{r}
+head(OccupationsProjection)
+OccupationsProjection %>%
+  select(Occupation_Name, Projected_Year, Projected_Salary) %>%
+  arrange(desc(Projected_Salary)) %>%
+  head(10)
+```
 
