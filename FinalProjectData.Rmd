@@ -139,4 +139,3 @@ nrow(SalariesByRegion)
 ```{r}
 
 ```
-
