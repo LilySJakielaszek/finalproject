@@ -26,7 +26,7 @@ degrees_that_pay_back = readr::read_csv("degrees-that-pay-back.csv")
 ```
 # Research Question
 
-What occupations and majors by state will have the highest salary and have the greatest future outlook?
+What school, major, and occupation should a prospective college student choose (what is the game plan)?
 
 ## Make New Datasets
 
@@ -135,18 +135,42 @@ tail(SalariesByRegion)
 nrow(SalariesByRegion)
 ```
 
-### Inspect Salaries by Region
+### First Step in Game Plan: Find the Schools with the Highest Salaries
+
+Join the datasets together to match up the school names. 
 ```{r}
-Salaries <-
+SchoolSalaries <-
   SalariesByCollegeType %>%
-  full_join(SalariesByRegion) %>%
-  na.omit()
-head(Salaries)
-
-LookingAtMedianForStarting <-
-  Salaries %>%
-  mutate(mean = mean(Starting_Median_Salary)) 
-LookingAtMedianForStarting
-
+  full_join(SalariesByRegion)
+head(SchoolSalaries)
 ```
+
+Now we will observe the top ten schools with the highest starting median salaries 
+```{r}
+SchoolSalaries %>%
+  select(School_Name, School_Type, Region, Starting_Median_Salary) %>%
+  arrange(desc(Starting_Median_Salary)) %>% 
+  head(10)
+```
+
+Now we will find the top ten schools with the highest mid-career median salaries 
+```{r}
+SchoolSalaries %>%
+  select(School_Name, School_Type, Region, Mid_Career_Median_Salary) %>%
+  arrange(desc(Mid_Career_Median_Salary)) %>% 
+  head(10)
+```
+At this point we can see that California and NorthEastern schools are in the top ten consistenly. We can also see that the top school types are Ivy League and Engineering schools. 
+
+Now we will combine these results to find the best school for percent change from starting to mid-career median salary which will show the best school for salary growth over time
+```{r}
+SchoolSalaries %>%
+  mutate(Percent_Change = ((Mid_Career_Median_Salary - Starting_Median_Salary)/Starting_Median_Salary) * 100) %>%
+  select(School_Name, School_Type, Percent_Change) %>%
+  arrange(desc(Percent_Change)) %>%
+  head(10)
+```
+
+We can conclude that the school to pick if you want the highest starting median salary is California Institute of Technology (CIT) with a salary amount of $75,500, the school to pick if you want the highest mid-career median salary is Dartmouth College with a salary amount of $134,000, and the school to pick if you want the best salary growth over time is DartMouth College with a salary percent growth from starting to mid-career median salary of 131.0345%. 
+
 
