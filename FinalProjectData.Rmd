@@ -197,6 +197,7 @@ We can conclude that the school to pick if you want the highest starting median 
 We will be using the DegreesThatPayBack dataset to answer this part of the game plan
 
 First we will look at the top ten majors with the best starting median salary
+
 ```{r}
 head(DegreesThatPayBack)
 DegreesThatPayBack %>%
@@ -221,7 +222,7 @@ DegreesThatPayBack <-
   DegreesThatPayBack%>%
   select(Undergraduate_Major, Percent_Change_From_Starting_To_MidCareer_Salary) %>%
   arrange(desc(Percent_Change_From_Starting_To_MidCareer_Salary)) %>%
-  head(10)
+  head(50)
 DegreesThatPayBack
 ```
 From this we can see that Math is best major for average salary growth 
@@ -230,10 +231,12 @@ From this we can see that Math is best major for average salary growth
 
 ```{r}
 DegreesThatPayBack %>%
-  ggplot(aes(x = Undergraduate_Major, y = Percent_Change_From_Starting_To_MidCareer_Salary)) +
-  geom_bar() +
+  ggplot(aes(x = reorder(Undergraduate_Major, -Percent_Change_From_Starting_To_MidCareer_Salary), y = Percent_Change_From_Starting_To_MidCareer_Salary)) +
+  geom_bar(stat = "identity") +
   xlab("Undergraduate Major") +
-  ylab("Percent Change from ")
+  ylab("Percent Change from ")+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
 ```
 
 
