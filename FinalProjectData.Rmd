@@ -234,13 +234,10 @@ DegreesThatPayBack %>%
   ggplot(aes(x = reorder(Undergraduate_Major, -Percent_Change_From_Starting_To_MidCareer_Salary), y = Percent_Change_From_Starting_To_MidCareer_Salary)) +
   geom_bar(stat = "identity") +
   xlab("Undergraduate Major") +
-  ylab("Percent Change from ")+
+  ylab("Percent Change: Starting to Mid-Career Salary")+
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 ```
-
-
-
 
 
 ### Conclusions of Majors and Salaries
