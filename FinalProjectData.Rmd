@@ -137,5 +137,7 @@ nrow(SalariesByRegion)
 
 ### Join Datasets Together 
 ```{r}
-
+Salaries<-salaries_by_college_type%>%
+  full_join(salaries_by_region)
+na.omit(Salaries)
 ```
