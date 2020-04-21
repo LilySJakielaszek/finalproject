@@ -87,7 +87,7 @@ DegreesThatPayBack
 OccupationProjection <-
   OccupationProjection %>%
   mutate(State_FIPS = State.FIPS,
-         Area_Name = Area.Name,
+         Region = Area.Name,
          Occupation_Code = Occupation.Code,
          Occupation_Name = Occupation.Name,
          Base_Year = Base.Year,
@@ -95,10 +95,11 @@ OccupationProjection <-
          Projected_Year = Projected.Year,
          Mid_Career_Median_Salary = Projection,
          Percent_Change_From_Starting_To_MidCareer_Salary = Percent.Change,
-         Average_Annual_Openings = Average.Annual.Openings)
+         Average_Annual_Openings = Average.Annual.Openings) 
 OccupationProjection <-
   OccupationProjection %>%
-  select(State_FIPS, Area_Name, Occupation_Code, Occupation_Name, Base_Year, Starting_Median_Salary, Projected_Year, Mid_Career_Median_Salary, Change, Percent_Change_From_Starting_To_MidCareer_Salary, Average_Annual_Openings)
+  select(State_FIPS, Region, Occupation_Code, Occupation_Name, Base_Year, Starting_Median_Salary, Projected_Year, Mid_Career_Median_Salary, Change, Percent_Change_From_Starting_To_MidCareer_Salary, Average_Annual_Openings) %>%
+  filter(Region != " United States")
 OccupationProjection
 ```
 ### Inspecting the Revised Datasets 
