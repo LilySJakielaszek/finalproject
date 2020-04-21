@@ -135,10 +135,18 @@ tail(SalariesByRegion)
 nrow(SalariesByRegion)
 ```
 
-### Join Datasets Together 
+### Evaluating Salaries and Region 
 ```{r}
-Salaries<-salaries_by_college_type%>%
-  full_join(salaries_by_region)
-na.omit(Salaries)
+Salaries <-
+  SalariesByCollegeType %>%
+  full_join(SalariesByRegion) %>%
+  na.omit()
+head(Salaries)
+```
+```{r}
+LookingAtMedianForStarting <-
+  Salaries %>%
+  mutate(mean = mean(Starting_Median_Salary)) 
+LookingAtMedianForStarting
 ```
 
