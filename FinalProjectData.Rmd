@@ -154,10 +154,12 @@ SchoolSalaries %>%
 
 Now we will find the top ten schools with the highest mid-career median salaries 
 ```{r}
-SchoolSalaries %>%
+MidCareerMedianSalaries <-
+  SchoolSalaries %>%
   select(School_Name, School_Type, Region, Mid_Career_Median_Salary) %>%
   arrange(desc(Mid_Career_Median_Salary)) %>% 
   head(10)
+MidCareerMedianSalaries
 ```
 At this point we can see that California and NorthEastern schools are in the top ten consistenly. We can also see that the top school types are Ivy League and Engineering schools. 
 
@@ -185,6 +187,16 @@ SchoolSalariesGraphic <-
 
 SchoolSalariesGraphic
 
+```
+
+```{r}
+MidCareerMedianSalaries %>%
+  ggplot(aes(x = School_Name, y = Mid_Career_Median_Salary, color = Region)) +
+  facet_wrap(~ School_Type) +
+  geom_point(size = 1) +
+  xlab("School Name") +
+  ylab("Top Mid-Career Median Salaries") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 
 
@@ -294,7 +306,7 @@ Occupation_Proj_Salary_Base <-
   OccupationsProjection %>%
   rename(Name = Occupation_Name, Code = Occupation_Code) %>%
   full_join(OccupationSalaries)
-Occupation_Proj_Salary <-na.omit(Occupation_Proj_Salary)
+Occupation_Proj_Salary <- na.omit(Occupation_Proj_Salary_Base)
 Occupation_Proj_Salary
 ```
 
@@ -361,7 +373,7 @@ With these results we can conclude that the job with the highest salary is Chief
 
 # Conclusions for Answering the Research Question 
 
-
+In conclusion, a student should choose the college , the major , and the occupation . 
 
 
 
