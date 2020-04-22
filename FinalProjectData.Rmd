@@ -234,7 +234,7 @@ DegreesThatPayBack %>%
   ggplot(aes(x = reorder(Undergraduate_Major, -Percent_Change_From_Starting_To_MidCareer_Salary), y = Percent_Change_From_Starting_To_MidCareer_Salary)) +
   geom_bar(stat = "identity") +
   xlab("Undergraduate Major") +
-  ylab("Percent Change: Starting to Mid-Career Salary")+
+  ylab("Percent Change: Starting to Mid-Career Salary") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 ```
@@ -251,78 +251,104 @@ We will be using the OccupationSalaries dataset which we found on a website onli
 First we will extract the table from the website online
 ```{r}
 web_page<-"https://www.bls.gov/oes/current/oes_nat.htm#00-0000"
-ListofTables<- web_page%>%
-  read_html()%>%
-  html_nodes(css= "table")%>%
-  html_table(fill=TRUE)
-
+ListofTables <-
+  web_page %>%
+  read_html() %>%
+  html_nodes( css = "table") %>%
+  html_table(fill = TRUE)
 ```
 
 Next, we will use data scraping to get the data ready for analysis
 ```{r}
 head(ListofTables[[2]])
-OccupationSalaries<-ListofTables[[2]]
-OccupationSalaries<-OccupationSalaries%>%
-  filter(row_number()>2)%>%
-   rename(Code=`Occupation code`,
-          Name=`Occupation title (click on the occupation title to view its profile)`,
-          Level=Level,
-          Employment=Employment,
-          RSE=`Employment RSE`,
-          EP1J=`Employment per 1,000 jobs`,
-          Median=`Median hourly wage`,
-          Mean=`Mean hourly wage`,
-          Annual=`Annual mean wage`,
-          WRSE=`Mean wage RSE`)
+OccupationSalaries <- ListofTables[[2]]
+OccupationSalaries <- OccupationSalaries %>%
+  filter(row_number() > 2) %>%
+   rename(Code = `Occupation code`,
+          Name =`Occupation title (click on the occupation title to view its profile)`,
+          Level = Level,
+          Employment = Employment,
+          RSE = `Employment RSE`,
+          EP1J = `Employment per 1,000 jobs`,
+          Median = `Median hourly wage`,
+          Mean = `Mean hourly wage`,
+          Annual = `Annual mean wage`,
+          WRSE = `Mean wage RSE`)
 str(OccupationSalaries)
-OccupationSalaries<-OccupationSalaries%>%
-  mutate(Employment=gsub(pattern=',',replacement='',Employment),RSE=gsub(pattern='%',replacement='',RSE),Median=gsub(pattern='\\$',replacement='',Median),Mean=gsub(pattern='\\$',replacement='',Mean),Annual=gsub(pattern='\\$|,',replacement='',Annual),WRSE=gsub(pattern='%',replacement='',WRSE))
+OccupationSalaries <- 
+  OccupationSalaries %>%
+  mutate(Employment = gsub(pattern = ',', replacement = '', Employment), RSE = gsub(pattern = '%', replacement = '', RSE), Median = gsub(pattern = '\\$', replacement = '', Median), Mean = gsub(pattern = '\\$', replacement = '', Mean), Annual = gsub(pattern = '\\$|,', replacement = '', Annual), WRSE = gsub(pattern = '%', replacement = '', WRSE))
 
-OccupationSalaries<-OccupationSalaries%>%
-  mutate(Employment=as.numeric(Employment),RSE=as.numeric(RSE),EP1J=as.numeric(EP1J),Median=as.numeric(Median),Mean=as.numeric(Mean),Annual=as.numeric(Annual),WRSE=as.numeric(WRSE))
+OccupationSalaries<-
+  OccupationSalaries %>%
+  mutate(Employment = as.numeric(Employment), RSE = as.numeric(RSE),EP1J = as.numeric(EP1J), Median = as.numeric(Median), Mean = as.numeric(Mean), Annual = as.numeric(Annual), WRSE = as.numeric(WRSE))
 str(OccupationSalaries)
-OccupationSalaries<-na.omit(OccupationSalaries)
+OccupationSalaries <- na.omit(OccupationSalaries)
 OccupationSalaries
 ```
 
-Now we will join the OccupationSalaries dataset to the OccupationProjection dataset so that we can make a full analysis on Occupations
+Now we will join the OccupationSalaries dataset to the OccupationProjection dataset so that we can make a full analysis on Occupations that will provide us with data on salaries as well as job openings. 
 
 ```{r}
-Occupation_Proj_Salary<-OccupationsProjection%>%
-  rename(Name=Occupation_Name, Code=Occupation_Code)%>%
+Occupation_Proj_Salary<-
+  OccupationsProjection %>%
+  rename(Name = Occupation_Name, Code = Occupation_Code) %>%
   full_join(OccupationSalaries)
-Occupation_Proj_Salary<-na.omit(Occupation_Proj_Salary)
+Occupation_Proj_Salary <-na.omit(Occupation_Proj_Salary)
 Occupation_Proj_Salary
 ```
 
-### Finding Occupations with the best job security
+## Finding Occupations with the Best Job Security
 ```{r}
-Occupation_Proj_Salary%>%
-  filter(EP1J>15, Percent_Change>10,Average_Annual_Openings>1000)%>%
-  arrange(desc(Percent_Change))%>%
-  group_by(Name)%>%
-  summarise(Average_Annual_Openings=sum(Average_Annual_Openings))%>%
-  arrange(desc(Average_Annual_Openings))%>%
-  head()
-  
-  
-  
-  
+Occupation_Proj_Salary %>%
+  filter(EP1J > 15, Percent_Change > 10,Average_Annual_Openings > 1000) %>%
+  arrange(desc(Percent_Change)) %>%
+  group_by(Name) %>%
+  summarise(Average_Annual_Openings = sum(Average_Annual_Openings)) %>%
+  arrange(desc(Average_Annual_Openings)) %>%
+  head(10)
 ```
 
-In the above analysis we tried to find the jobs that have the best security. We defined security as having a high upward change in job creation, a high average annual job opening and a high EP1J (Employment per 1000 jobs). As an arbitrary value for high we decided on an EP1J of greater than 15, A annual job openings of greater than 1000 and a high upward change in job creation of greater than 10%. We Thus filtered these jobs out of the data-set and the 6 jobs with the highest security are Registered nurses, Retail Salespersons, Customer Service Representatives, Laborers and Freight and General and Operations Managers. These jobs are not however, the best in terms of Salary. This is what we will analyse next.
+In the above analysis we tried to find the jobs that have the best security. We defined security as having a high upward change in job creation, a high average annual job opening and a high EP1J (Employment per 1000 jobs). As an arbitrary value for high we decided on an EP1J of greater than 15, A annual job openings of greater than 1000 and a high upward change in job creation of greater than 10%. We Thus filtered these jobs out of the data-set and the 6 jobs with the highest security are Registered nurses, Retail Salespersons, Customer Service Representatives, Laborers and Freight and General and Operations Managers, Cashiers, and Office Clerks. These jobs are not however, the best in terms of Salary. This is what we will analyse next.
 
-### Finding jobs with the highest Salaries
+## Finding Jobs with the Highest Salaries
 ```{r}
-Occupation_Proj_Salary%>%
-  arrange(desc(Annual))%>%
-  group_by(Name)%>%
-  summarise(AnnualSalary=sum(Annual))%>%
-  arrange(desc(AnnualSalary))%>%
-  head()
-  
+Occupation_Proj_Salary %>%
+  arrange(desc(Annual)) %>%
+  group_by(Name) %>%
+  summarise(AnnualSalary = sum(Annual)) %>%
+  arrange(desc(AnnualSalary)) %>%
+  head(10)
 ```
 
-From the above analysis, it is clear that the jobs with the highest salaries include, Chief Executives, Dentists, Nurse Anesthetists, Computer and Information Systems Managers, Financial Managers and Architectural and Engineering Managers.
+From the above analysis, it is clear that the jobs with the highest salaries include, Chief Executives, Dentists, Nurse Anesthetists, Computer and Information Systems Managers, Financial Managers and Architectural and Engineering Managers, Lawyers, Marketing Managers, Sales Managers, and Natural Sciences Majors.
 
-From this analysis it is clear that the jobs that provide the highest job security do not provide the best security financially. 
+## Visualizations 
+
+
+
+
+
+
+### Conclusions of Jobs and Salaries and Security 
+
+With these results we can conclude that the job with the highest salary is Chief Executives at $9,304,800 annual salary and the job with the best job secruity is Registered Nurses with 210,350 average annual job openings. From this analysis it is clear that the jobs that provide the highest job security do not provide the best security financially. 
+
+# Conclusions for Answering the Research Question 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
