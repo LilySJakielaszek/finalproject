@@ -329,12 +329,14 @@ Occupation_Proj_SalaryGraphic1
 ## Finding Jobs with the Highest Salaries
 
 ```{r}
-Occupation_Proj_Salary_Base %>%
+highSalary <-
+  Occupation_Proj_Salary_Base %>%
   arrange(desc(Annual)) %>%
   group_by(Name) %>%
   summarise(AnnualSalary = sum(Annual)) %>%
   arrange(desc(AnnualSalary)) %>%
-  head(10)
+  head(20)
+highSalary
 ```
 
 From the above analysis, it is clear that the jobs with the highest salaries include, Chief Executives, Dentists, Nurse Anesthetists, Computer and Information Systems Managers, Financial Managers and Architectural and Engineering Managers, Lawyers, Marketing Managers, Sales Managers, and Natural Sciences Majors.
@@ -342,15 +344,14 @@ From the above analysis, it is clear that the jobs with the highest salaries inc
 ## Visualizations 
 ```{r}
 Occupation_Proj_SalaryGraphic2 <-
-  Occupation_Proj_Salary_Base %>%
+  highSalary %>%
   ggplot(aes(x = reorder(Name, -AnnualSalary), y = AnnualSalary)) +
   geom_bar(stat = "identity") +
   xlab("Job") +
   ylab("Annual Salary") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
-Occupation_Proj_SalaryGraphic
+Occupation_Proj_SalaryGraphic2
 ```
-
 
 
 
