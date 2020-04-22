@@ -300,16 +300,31 @@ Occupation_Proj_Salary
 
 ## Finding Occupations with the Best Job Security
 ```{r}
-Occupation_Proj_Salary %>%
+Occupation_Proj_Salary <-
+  Occupation_Proj_Salary%>%
   filter(EP1J > 15, Percent_Change > 10,Average_Annual_Openings > 1000) %>%
   arrange(desc(Percent_Change)) %>%
   group_by(Name) %>%
   summarise(Average_Annual_Openings = sum(Average_Annual_Openings)) %>%
   arrange(desc(Average_Annual_Openings)) %>%
-  head(10)
+  head(50)
+Occupation_Proj_Salary
 ```
 
 In the above analysis we tried to find the jobs that have the best security. We defined security as having a high upward change in job creation, a high average annual job opening and a high EP1J (Employment per 1000 jobs). As an arbitrary value for high we decided on an EP1J of greater than 15, A annual job openings of greater than 1000 and a high upward change in job creation of greater than 10%. We Thus filtered these jobs out of the data-set and the 6 jobs with the highest security are Registered nurses, Retail Salespersons, Customer Service Representatives, Laborers and Freight and General and Operations Managers, Cashiers, and Office Clerks. These jobs are not however, the best in terms of Salary. This is what we will analyse next.
+
+## Visualizations 
+```{r}
+Occupation_Proj_SalaryGraphic <-
+  Occupation_Proj_Salary %>%
+  ggplot(aes(x = reorder(Name, -Average_Annual_Openings), y = Average_Annual_Openings)) +
+  geom_bar(stat = "identity") +
+  xlab("Job") +
+  ylab("Average Annual Openings") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+Occupation_Proj_SalaryGraphic
+```
+
 
 ## Finding Jobs with the Highest Salaries
 ```{r}
