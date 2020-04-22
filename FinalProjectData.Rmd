@@ -290,7 +290,7 @@ OccupationSalaries
 Now we will join the OccupationSalaries dataset to the OccupationProjection dataset so that we can make a full analysis on Occupations that will provide us with data on salaries as well as job openings. 
 
 ```{r}
-Occupation_Proj_Salary<-
+Occupation_Proj_Salary_Base <-
   OccupationsProjection %>%
   rename(Name = Occupation_Name, Code = Occupation_Code) %>%
   full_join(OccupationSalaries)
@@ -301,7 +301,7 @@ Occupation_Proj_Salary
 ## Finding Occupations with the Best Job Security
 ```{r}
 Occupation_Proj_Salary <-
-  Occupation_Proj_Salary%>%
+  Occupation_Proj_Salary_Base %>%
   filter(EP1J > 15, Percent_Change > 10,Average_Annual_Openings > 1000) %>%
   arrange(desc(Percent_Change)) %>%
   group_by(Name) %>%
@@ -315,20 +315,21 @@ In the above analysis we tried to find the jobs that have the best security. We 
 
 ## Visualizations 
 ```{r}
-Occupation_Proj_SalaryGraphic <-
+Occupation_Proj_SalaryGraphic1 <-
   Occupation_Proj_Salary %>%
   ggplot(aes(x = reorder(Name, -Average_Annual_Openings), y = Average_Annual_Openings)) +
   geom_bar(stat = "identity") +
   xlab("Job") +
   ylab("Average Annual Openings") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
-Occupation_Proj_SalaryGraphic
+Occupation_Proj_SalaryGraphic1
 ```
 
 
 ## Finding Jobs with the Highest Salaries
+
 ```{r}
-Occupation_Proj_Salary %>%
+Occupation_Proj_Salary_Base %>%
   arrange(desc(Annual)) %>%
   group_by(Name) %>%
   summarise(AnnualSalary = sum(Annual)) %>%
@@ -339,8 +340,16 @@ Occupation_Proj_Salary %>%
 From the above analysis, it is clear that the jobs with the highest salaries include, Chief Executives, Dentists, Nurse Anesthetists, Computer and Information Systems Managers, Financial Managers and Architectural and Engineering Managers, Lawyers, Marketing Managers, Sales Managers, and Natural Sciences Majors.
 
 ## Visualizations 
-
-
+```{r}
+Occupation_Proj_SalaryGraphic2 <-
+  Occupation_Proj_Salary_Base %>%
+  ggplot(aes(x = reorder(Name, -AnnualSalary), y = AnnualSalary)) +
+  geom_bar(stat = "identity") +
+  xlab("Job") +
+  ylab("Annual Salary") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+Occupation_Proj_SalaryGraphic
+```
 
 
 
