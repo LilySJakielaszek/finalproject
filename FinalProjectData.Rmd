@@ -191,7 +191,12 @@ SchoolSalariesGraphic
 ```
 
 ```{r}
-MidCareerMedianSalariesPlot <- party::ctree(Mid_Career_Median_Salaries - Region + School_Type, data = SchoolSalaries)
+glimpse(MidCareerMedianSalaries)
+```
+
+
+```{r}
+MidCareerMedianSalariesPlot <- party::ctree(Mid_Career_Median_Salary - Region + School_Type, data = SchoolSalaries)
 plot(MidCareerMedianSalariesPlot, type = "simple")
 ```
 
