@@ -13,6 +13,7 @@ library(lubridate)
 library(tidyverse)
 library(rvest)
 library(mosaic)
+library(party)
 OccupationProjection <- read.csv("https://query.data.world/s/hfgf3loqzzbk34aytghvne5sxg3ljr", header=TRUE, stringsAsFactors=FALSE);
 
 OccupationProjection<-OccupationProjection%>%
@@ -190,13 +191,8 @@ SchoolSalariesGraphic
 ```
 
 ```{r}
-MidCareerMedianSalaries %>%
-  ggplot(aes(x = School_Name, y = Mid_Career_Median_Salary, color = Region)) +
-  facet_wrap(~ School_Type) +
-  geom_point(size = 1) +
-  xlab("School Name") +
-  ylab("Top Mid-Career Median Salaries") +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+MidCareerMedianSalariesPlot <- party::ctree(Mid_Career_Median_Salaries - Region + School_Type, data = SchoolSalaries)
+plot(MidCareerMedianSalariesPlot, type = "simple")
 ```
 
 
@@ -247,7 +243,7 @@ DegreesThatPayBack %>%
   geom_bar(stat = "identity") +
   xlab("Undergraduate Major") +
   ylab("Percent Change: Starting to Mid-Career Salary") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
 ```
 
@@ -373,7 +369,7 @@ With these results we can conclude that the job with the highest salary is Chief
 
 # Conclusions for Answering the Research Question 
 
-In conclusion, a student should choose the college , the major , and the occupation . 
+In conclusion, a student should choose the college California Institute of Technology (CIT) , the major Physician Assistant , and the occupation Chief Executive. We chose these factors by the highest starting median salary. 
 
 
 
