@@ -201,13 +201,37 @@ SchoolSalariesGraphic
 ```
 
 ```{r}
-glimpse(MidCareerMedianSalaries)
+SchoolSalaries %>% # This code will find the mean for mid career salary
+  summarise(mean = sum(Mid_Career_Median_Salary)/349)
+MidCareerAvgMedianSalary <-
+  SchoolSalaries %>%
+  mutate(Above_Avg_MidCareer_Median_Salary = ifelse(Mid_Career_Median_Salary <= 83609.74, "yes", "no")) # This code uses the mean to indicate an above or below for each school
+MidCareerAvgMedianSalary
 ```
 
+Now we will make a tree to demostrate the importance of school type and region in determining whether a school will have an above average mid career median salary
 
 ```{r}
-MidCareerMedianSalariesPlot <- party::ctree(Mid_Career_Median_Salary - Region + School_Type, data = SchoolSalaries)
+MidCareerMedianSalariesPlot <- party::ctree(Above_Avg_MidCareer_Median_Salary ~ Region + School_Type, data = MidCareerAvgMedianSalary)
 plot(MidCareerMedianSalariesPlot, type = "simple")
+```
+
+We will do the same thing as up above but now we will look at starting median salary
+
+```{r}
+SchoolSalaries %>% # This code will find the mean for starting salary
+  summarise(mean = sum(Starting_Median_Salary)/349)
+StartingAvgMedianSalary <-
+  SchoolSalaries %>%
+  mutate(Above_Avg_Starting_Median_Salary = ifelse(Starting_Median_Salary <= 46093.41, "yes", "no"))
+StartingAvgMedianSalary
+```
+
+Now we will make a tree to demonstrate the importance of school type and region in determining whether a school will have an above average starting median salary
+
+```{r}
+StartingMedianSalariesPlot <- party::ctree(Above_Avg_Starting_Median_Salary ~ Region + School_Type, data = StartingAvgMedianSalary)
+plot(StartingMedianSalariesPlot, type = "simple")
 ```
 
 
