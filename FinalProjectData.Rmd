@@ -151,9 +151,8 @@ StartingMedianSalary <- (SchoolSalaries$Starting_Median_Salary)
 MidCareerMedianSalary <- (SchoolSalaries$Mid_Career_Median_Salary)
 Medians <- c("Starting", "MidCareer")
 
-boxplot(StartingMedianSalary, MidCareerMedianSalary, names = Medians, ylab = "Median Salary", main = "Starting Median Salary vs MidCareer Median Salary for all Schools")
+boxplot(StartingMedianSalary, MidCareerMedianSalary, names = Medians, ylab = "Salary", main = "Starting Median Salary vs MidCareer Median Salary for all Schools")
 ```
-
 
 Now we will observe the top ten schools with the highest starting median salaries 
 ```{r}
