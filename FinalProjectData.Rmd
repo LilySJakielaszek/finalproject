@@ -422,7 +422,7 @@ With these results we can conclude that the job with the highest salary is Chief
 
 # Conclusions for Answering the Research Question 
 
-In conclusion, a student should choose the college California Institute of Technology (CIT) , the major Physician Assistant , and the occupation Chief Executive. We chose these factors by the highest starting median salary. 
+In conclusion, a student should choose one of the colleges California Institute of Technology (CIT), Massachusetts Institute of Technology (MIT), Harvey Mudd College, Stanford University, or Princeton University. One of the majors you should choose are Physician Assistant, Chemical Engineering, Computer Engineering, Electrical Engineering, or Mechanical Engineering. One of the occupations you should choose are Chief Executive, Dentists, Nurse Anesthetists, Computer and Information Systems Managers, or Financial Managers. We chose these factors because they are the top five for highest starting median salary. 
 
 
 
