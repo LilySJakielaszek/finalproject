@@ -14,9 +14,16 @@ FinalProjectData RMD = Lines 108-113 for str,nrow,head,tail for OccupationProjec
 ### Data Wrangling
 
 (A) .Rmd Line number(s) for general data wrangling:
-Select = Lines 44-45 for SalariesByRegion, Lines 61-62 for SalariesByCollegeType, Lines 79-80 for DegreesThatPayBack, Lines 97-98 for OccupationProjection
-Mutate = Lines 34-41 for SalariesByRegion, Lines 50-58 for SalariesByCollegeType, Lines 68-76 for DegreesThatPayBack, Lines 85-94 for OccupationProjection
+Select = .Rmd Lines 49, 66, 84, 102, 160, 169, 181, 217, 245, 268, 277, 287
+Mutate = .Rmd Lines 39-46, 55-63, 73-81, 90-99, 180, 208, 235, 344, 348
+Filter = .Rmd Lines 330, 369
+Summarise = .Rmd Lines 204, 231, 372, 400
+Arrange = .Rmd Lines 161, 170, 182, 269, 278, 288, 373, 401
+Group_By = .Rmd Lines 371, 399
+
 (B) .Rmd Line number(s) for a join operation:
+
+
 (D) .Rmd Line number(s) for use of regular expressions:
 (E) .Rmd Line number(s) for use of reduction and/or transformation functions: 
 (F) .Rmd Line number(s) for use of user-defined functions:
