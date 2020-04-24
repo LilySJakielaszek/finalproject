@@ -1,6 +1,6 @@
 ---
 title: "FinalProjectData"
-authors: "Lily Jakielaszek, Allison Denenberg, Ayoolwatomiwa Ogunrombi"
+author: "Lily Jakielaszek, Allison Denenberg, Ayoolwatomiwa Ogunrombi"
 output: html_notebook
 ---
 
@@ -27,11 +27,11 @@ degrees_that_pay_back = readr::read_csv("degrees-that-pay-back.csv")
 ```
 # Research Question
 
-What school, major, and occupation should a prospective college student choose (what is the game plan)?
+Which schools, majors, and occupations have the highest median salary? This question can act as a game plan for prospective college students.
 
 ## Make New Datasets
 
-These datasets will be the ones that will be used to perform statistics on and joins on. They are renamed from the original datasets and include all the same information except they have R acceptable variable names and the correct type for the their output. 
+These datasets will be the ones that will be used to perform statistics on. They are renamed from the original datasets and include all the same information except they have R acceptable variable names and the correct type for the their output. 
 
 ```{r}
 SalariesByRegion <-
@@ -102,8 +102,8 @@ OccupationsProjection <-
   select(State_FIPS, Region, Occupation_Code, Occupation_Name, Base_Year, Base, Projected_Year, Projection, Percent_Change, Average_Annual_Openings) 
 OccupationsProjection
 ```
-### Inspecting the Revised Datasets 
-## OccupationProjection Inspection
+## Inspecting the Revised Datasets 
+### OccupationProjection Inspection
 ```{r}
 str(OccupationProjection)
 head(OccupationProjection)
@@ -111,7 +111,7 @@ tail(OccupationProjection)
 nrow(OccupationProjection)
 ```
 
-## DegreesThatPayBack Inspection
+### DegreesThatPayBack Inspection
 ```{r}
 str(DegreesThatPayBack)
 head(DegreesThatPayBack)
@@ -119,7 +119,7 @@ tail(DegreesThatPayBack)
 nrow(DegreesThatPayBack)
 ```
 
-## SalariesByCollegeType Inspection
+### SalariesByCollegeType Inspection
 ```{r}
 str(SalariesByCollegeType)
 head(SalariesByCollegeType)
@@ -127,7 +127,7 @@ tail(SalariesByCollegeType)
 nrow(SalariesByCollegeType)
 ```
 
-## SalariesByRegion Inspection
+### SalariesByRegion Inspection
 ```{r}
 str(SalariesByRegion)
 head(SalariesByRegion)
@@ -135,9 +135,9 @@ tail(SalariesByRegion)
 nrow(SalariesByRegion)
 ```
 
-### First Step in Game Plan: Find the Schools with the Highest Salaries
+# First Step in Game Plan: Find the Schools with the Highest Salaries
 
-Join the datasets together to match up the school names. 
+Join the datasets together through the school name variable. This data frame will be used to find the schools with the highest salaries. 
 ```{r}
 SchoolSalaries <-
   SalariesByCollegeType %>%
@@ -145,7 +145,7 @@ SchoolSalaries <-
 head(SchoolSalaries)
 ```
 
-We are looking at side by side box plots of each school type and comparing their starting median salaries.
+We are looking at side by side box plots of each school type and comparing their starting median salaries. This will help us develop an idea baout which school types have the overall highest starting median salaries. 
 ```{r}
 ggplot(SchoolSalaries, aes(x = School_Type, y = Starting_Median_Salary)) +
   geom_boxplot() +
@@ -154,7 +154,7 @@ ggplot(SchoolSalaries, aes(x = School_Type, y = Starting_Median_Salary)) +
   ggtitle("Starting Median Salary Based on School Type")
 ```
 
-Now we will observe the top ten schools with the highest starting median salaries.
+Now we will observe the top ten schools with the highest starting median salaries. This table will be used to answer the research question.
 ```{r}
 SchoolSalaries %>%
   select(School_Name, School_Type, Region, Starting_Median_Salary) %>%
@@ -171,7 +171,7 @@ MidCareerMedianSalaries <-
   head(10)
 MidCareerMedianSalaries
 ```
-At this point we can see that California and NorthEastern schools are in the top ten consistenly. We can also see that the top school types are Ivy League and Engineering schools. 
+At this point we can see that California and NorthEastern schools are in the top ten consistently. We can also see that the top school types are Ivy League and Engineering schools. 
 
 Now we will combine these results to find the best school for percent change from starting to mid-career median salary which will show the best school for salary growth over time.
 ```{r}
@@ -186,6 +186,7 @@ percentChange
 
 ## Visualizations on Schools and Salaries 
 
+This graph shows the progression of percent change from each school and their school type.
 ```{r}
 SchoolSalariesGraphic <-
   percentChange%>%
@@ -196,9 +197,9 @@ SchoolSalariesGraphic <-
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
 SchoolSalariesGraphic
-
 ```
 
+This data frame is calculating a new variable called Above_Avg_MidCareer_Median_Salary which will be used to determine whether the mid career salary is above or below the average of all the schools mid career median salaries.
 ```{r}
 SchoolSalaries %>% # This code will find the mean for mid career salary
   summarise(mean = sum(Mid_Career_Median_Salary)/339)
@@ -209,22 +210,21 @@ MidCareerAvgMedianSalary <-
 MidCareerAvgMedianSalary
 ```
 
-Now we will make a tree to demostrate the importance of school type and region in determining whether a school will have an above average mid career median salary.
-
+Now we will make a tree to demonstrate the importance of school type and region in determining whether a school will have an above average mid career median salary.
 ```{r}
 TreeForMidCareer <- 
   MidCareerAvgMedianSalary %>%
-  select(Above_Avg_MidCareer_Median_Salary, Starting_Median_Salary,Mid_Career_Median_Salary,School_Type, Region) 
-TreeForMidCareer<-TreeForMidCareer%>%mutate(School_Type=as.factor(School_Type), Region=as.factor(Region))
-mod1 <- party::ctree(Above_Avg_MidCareer_Median_Salary=="yes"~ School_Type+Region, data = TreeForMidCareer)
-plot(mod1,type="simple")
+  select(Above_Avg_MidCareer_Median_Salary, Starting_Median_Salary, Mid_Career_Median_Salary, School_Type, Region) 
+TreeForMidCareer<-
+  TreeForMidCareer %>%
+  mutate(School_Type = as.factor(School_Type), Region = as.factor(Region))
+mod1 <- party::ctree(Above_Avg_MidCareer_Median_Salary == "yes" ~ School_Type + Region, data = TreeForMidCareer)
+plot(mod1, type = "simple") 
 ```
-
 According to this decision tree, Party and State Schools lead to a high chance of having an above average mid-career median salary. Specifically those in the Midwestern, Northeastern,Southern and Western regions have a high chance of 0.838. However this is inconsistent with what we have been seeing so far and we believe the size of our data-set is affecting our results and have chosen to ignore this conclusion. 
 
 
-We will do the same thing as up above but now we will look at starting median salary.
-
+This data frame is calculating a new variable called Above_Avg_MidCareer_Median_Salary which will be used to determine whether the mid career salary is above or below the average of all the schools mid career median salaries.
 ```{r}
 SchoolSalaries %>% # This code will find the mean for starting salary
   summarise(mean = sum(Starting_Median_Salary)/349)
@@ -235,19 +235,17 @@ StartingAvgMedianSalary
 ```
 
 Now we will make a tree to demonstrate the importance of school type and region in determining whether a school will have an above average starting median salary.
-
 ```{r}
-
 CompleteCases <- 
   StartingAvgMedianSalary %>%
   select(Above_Avg_Starting_Median_Salary, Starting_Median_Salary,Mid_Career_Median_Salary,School_Type, Region,School_Name) %>%
   na.omit() 
-CompleteCases<-CompleteCases%>%mutate(School_Type=as.factor(School_Type), Region=as.factor(Region),School_Name=as.factor(School_Name))
-mod1 <- party::ctree(Above_Avg_Starting_Median_Salary=="yes"~ School_Type+Region+School_Name, data = CompleteCases)
-plot(mod1,type="simple")
-
+CompleteCases <-
+  CompleteCases %>%
+  mutate(School_Type = as.factor(School_Type), Region = as.factor(Region), School_Name = as.factor(School_Name))
+mod1 <- party::ctree(Above_Avg_Starting_Median_Salary == "yes" ~ School_Type + Region + School_Name, data = CompleteCases)
+plot(mod1, type = "simple")
 ```
-
 According to this decision tree, the probability of having an above average starting median salary if you go to an Ivy-League or Engineering School is zero, which we know cannot be true. We therefore believe that the size of our data-set is affecting our results and have chosen to ignore this conclusion. However, according to the desicion tree, if you go to a School in the Midwestern, Southern or Western regions, you have a high probablity of 0.753 of getting an above average starting median salary.
 
 ### Conclusions on Schools and Salaries 
@@ -259,7 +257,6 @@ We can conclude that the school to pick if you want the highest starting median 
 We will be using the DegreesThatPayBack dataset to answer this part of the game plan.
 
 First we will look at the top ten majors with the best starting median salary.
-
 ```{r}
 head(DegreesThatPayBack)
 DegreesThatPayBack %>%
@@ -298,7 +295,6 @@ DegreesThatPayBack %>%
   xlab("Undergraduate Major") +
   ylab("Percent Change: Starting to Mid-Career Salary") +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
-
 ```
 
 
