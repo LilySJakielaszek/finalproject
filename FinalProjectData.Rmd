@@ -230,8 +230,16 @@ StartingAvgMedianSalary
 Now we will make a tree to demonstrate the importance of school type and region in determining whether a school will have an above average starting median salary
 
 ```{r}
-StartingMedianSalariesPlot <- party::ctree(Above_Avg_Starting_Median_Salary ~ Region + School_Type, data = StartingAvgMedianSalary)
-plot(StartingMedianSalariesPlot, type = "simple")
+
+CompleteCases <- 
+  StartingAvgMedianSalary %>%
+  select(Above_Avg_Starting_Median_Salary, Starting_Median_Salary,Mid_Career_Median_Salary,School_Type, Region) %>%
+  na.omit() 
+CompleteCases<-CompleteCases%>%mutate(School_Type=as.factor(School_Type), Region=as.factor(Region))
+mod1 <- party::ctree(Above_Avg_Starting_Median_Salary=="yes"~ School_Type+Region, data = CompleteCases)
+plot(mod1,type="simple")
+
+
 ```
 
 
@@ -421,6 +429,15 @@ In conclusion, a student should choose the college California Institute of Techn
 
 
 
+```{r}
+NCHS
+whoIsPregnant2 <- 
+  NCHS %>%
+  filter(sex == "female") %>%
+  ctree(pregnant == "yes" ~ age + income + ethnicity + height + smoker + bmi, 
+        data = .)
+whoIsPregnant2
+```
 
 
 
