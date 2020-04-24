@@ -7,11 +7,9 @@ output: html_notebook
 ### Data Access 
 * Research Question is on Line 29
 (A) .Rmd Line numbers where at least two different data sources are imported:
-1. FinalProjectRMD = Lines 19-21 for OccupationProjections from Data.World, lines 25-27 for three datasets from Kaggle
-2. FinalProjectData RMD = Lines 16-19 for Data.World dataset, lines 21-25 for three datasets from Kaggle
+FinalProjectData RMD = Line 17 for Data.World dataset, lines 22-26 for three datasets from Kaggle, line 317-322 for the data scraping dataset
 (B) .Rmd Line numbers for inspecting data intake:
-1. FinalProject RMD = Lines 35-53 for all four datasets nrow and ncol/ lines 76-97 for all four datasets glimpse and stating the number of cases in each dataset
-2. FinalProjectData RMD = Lines 103-108 for str,nrow,head,tail for OccupationProjections, Lines 111-116 for str,nrow,head,tail for DegreesThatPayBack, Lines 119-124 for str,nrow,head,tail for SalariesByCollegeType, Lines 127-132 for str,nrow,head,tail for SalariesByRegion
+FinalProjectData RMD = Lines 108-113 for str,nrow,head,tail for OccupationProjections, Lines 116-121 for str,nrow,head,tail for DegreesThatPayBack, Lines 124-129 for str,nrow,head,tail for SalariesByCollegeType, Lines 132-137 for str,nrow,head,tail for SalariesByRegion
 
 ### Data Wrangling
 
@@ -51,6 +49,5 @@ research question.
 (E) EXTRA CREDIT (1) Project is submitted as a self-contained GitHub Repo (2) project submission is a
 functioning github.io webpage generated for the project Repo. Note: a link to the GitHub Repo itself
 will be awarded partial credit, but does not itself qualify as a “webpage” of the analysis.
-
 
 
