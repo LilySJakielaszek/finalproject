@@ -145,7 +145,7 @@ SchoolSalaries <-
 head(SchoolSalaries)
 ```
 
-Side by side box plots of the starting median salaries vs the mid-career median salaries for all schools.
+We are looking at side by side box plots of each school type and comparing their starting median salaries.
 ```{r}
 ggplot(SchoolSalaries, aes(x = School_Type, y = Starting_Median_Salary)) +
   geom_boxplot() +
@@ -154,9 +154,7 @@ ggplot(SchoolSalaries, aes(x = School_Type, y = Starting_Median_Salary)) +
   ggtitle("Starting Median Salary Based on School Type")
 ```
 
-
-
-Now we will observe the top ten schools with the highest starting median salaries 
+Now we will observe the top ten schools with the highest starting median salaries.
 ```{r}
 SchoolSalaries %>%
   select(School_Name, School_Type, Region, Starting_Median_Salary) %>%
@@ -164,7 +162,7 @@ SchoolSalaries %>%
   head(10)
 ```
 
-Now we will find the top ten schools with the highest mid-career median salaries 
+Now we will find the top ten schools with the highest mid-career median salaries.
 ```{r}
 MidCareerMedianSalaries <-
   SchoolSalaries %>%
@@ -175,7 +173,7 @@ MidCareerMedianSalaries
 ```
 At this point we can see that California and NorthEastern schools are in the top ten consistenly. We can also see that the top school types are Ivy League and Engineering schools. 
 
-Now we will combine these results to find the best school for percent change from starting to mid-career median salary which will show the best school for salary growth over time
+Now we will combine these results to find the best school for percent change from starting to mid-career median salary which will show the best school for salary growth over time.
 ```{r}
 percentChange <-
   SchoolSalaries %>%
@@ -211,7 +209,7 @@ MidCareerAvgMedianSalary <-
 MidCareerAvgMedianSalary
 ```
 
-Now we will make a tree to demostrate the importance of school type and region in determining whether a school will have an above average mid career median salary
+Now we will make a tree to demostrate the importance of school type and region in determining whether a school will have an above average mid career median salary.
 
 ```{r}
 TreeForMidCareer <- 
@@ -226,7 +224,7 @@ plot(mod1,type="simple")
 According to this decision tree, the probability of having an above median mid career salary if you go to a state school leads to high chance of a high salary. This is a little shocking since Engineering and Ivy League Schools are grouped with Liberal Arts and Party Schools. We therefore believe that the size of our data-set is affecting our results and have chosen to ignore this conclusion. However, according to the desicion tree, If you go to a State School in the Midwestern, Southern or Western regions, you have a high probablity of 0.745 of getting an above median salary mid career. If you go to a Engineering or Ivy League Schools or Liberal Arts or Party Schools in the Southern or Western regions, you have a high probability of 0.474 of getting an above median salary mid career. This shows that the Southern and Western regions are the best indicators in the tree as leading to a higher salary, while the California Region leads to a low chance of a high salary no matter what school type you go to.
 
 
-We will do the same thing as up above but now we will look at starting median salary
+We will do the same thing as up above but now we will look at starting median salary.
 
 ```{r}
 SchoolSalaries %>% # This code will find the mean for starting salary
@@ -238,7 +236,7 @@ StartingAvgMedianSalary <-
 StartingAvgMedianSalary
 ```
 
-Now we will make a tree to demonstrate the importance of school type and region in determining whether a school will have an above average starting median salary
+Now we will make a tree to demonstrate the importance of school type and region in determining whether a school will have an above average starting median salary.
 
 ```{r}
 
@@ -260,9 +258,9 @@ We can conclude that the school to pick if you want the highest starting median 
 
 # Second Step in Game Plan: Finding the Majors with the Highest Salaries 
 
-We will be using the DegreesThatPayBack dataset to answer this part of the game plan
+We will be using the DegreesThatPayBack dataset to answer this part of the game plan.
 
-First we will look at the top ten majors with the best starting median salary
+First we will look at the top ten majors with the best starting median salary.
 
 ```{r}
 head(DegreesThatPayBack)
@@ -271,18 +269,18 @@ DegreesThatPayBack %>%
   arrange(desc(Starting_Median_Salary)) %>%
   head(10)
 ```
-From this we can see that the best major for starting median salary is a Physician Assistant
+From this we can see that the best major for starting median salary is a Physician Assistant.
 
-Now we will look at the top ten majors with the best mid-career median salary
+Now we will look at the top ten majors with the best mid-career median salary.
 ```{r}
 DegreesThatPayBack %>%
   select(Undergraduate_Major, Mid_Career_Median_Salary) %>%
   arrange(desc(Mid_Career_Median_Salary)) %>%
   head(10)
 ```
-From this we can see that the best major for mid-career median salary is Chemical Engineering
+From this we can see that the best major for mid-career median salary is Chemical Engineering.
 
-Now we will look at the top ten majors with the best percentage change from starting to mid-career median salary to see which major offers the best growth in salary
+Now we will look at the top ten majors with the best percentage change from starting to mid-career median salary to see which major offers the best growth in salary.
 ```{r}
 DegreesThatPayBack <-
   DegreesThatPayBack%>%
@@ -291,7 +289,7 @@ DegreesThatPayBack <-
   head(50)
 DegreesThatPayBack
 ```
-From this we can see that Math is best major for average salary growth 
+From this we can see that Math is best major for average salary growth.
 
 ## Visualization of Majors and Salaries
 
@@ -312,7 +310,7 @@ With these results we can conclude that the best major if you want the highest s
 
 # Third Step in Game Plan: Finding the Occupations with the Highest Salaries and Job Security 
 
-We will be using the OccupationSalaries dataset which we found on a website online for the evaluation of this step in the game plan
+We will be using the OccupationSalaries dataset which we found on a website online for the evaluation of this step in the game plan.
 
 First we will extract the table from the website online
 ```{r}
@@ -324,7 +322,7 @@ ListofTables <-
   html_table(fill = TRUE)
 ```
 
-Next, we will use data scraping to get the data ready for analysis
+Next, we will use data scraping to get the data ready for analysis.
 ```{r}
 head(ListofTables[[2]])
 OccupationSalaries <- ListofTables[[2]]
