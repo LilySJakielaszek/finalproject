@@ -233,15 +233,15 @@ Now we will make a tree to demonstrate the importance of school type and region 
 
 CompleteCases <- 
   StartingAvgMedianSalary %>%
-  select(Above_Avg_Starting_Median_Salary, Starting_Median_Salary,Mid_Career_Median_Salary,School_Type, Region) %>%
+  select(Above_Avg_Starting_Median_Salary, Starting_Median_Salary,Mid_Career_Median_Salary,School_Type, Region,School_Name) %>%
   na.omit() 
-CompleteCases<-CompleteCases%>%mutate(School_Type=as.factor(School_Type), Region=as.factor(Region))
-mod1 <- party::ctree(Above_Avg_Starting_Median_Salary=="yes"~ School_Type+Region, data = CompleteCases)
+CompleteCases<-CompleteCases%>%mutate(School_Type=as.factor(School_Type), Region=as.factor(Region),School_Name=as.factor(School_Name))
+mod1 <- party::ctree(Above_Avg_Starting_Median_Salary=="yes"~ School_Type+Region+School_Name, data = CompleteCases)
 plot(mod1,type="simple")
-
 
 ```
 
+According to this decision tree, the probability of having an above median salary if you go to an Ivy-League or Engineering School is zero, which we know cannot be true. We therefore believe that the size of our data-set is affecting our results and have chosen to ignore this conclusion. However, according to the desicion tree, If you go to a School in the Midwestern, Southern or Western regions, you have a high probablity of 0.753 of getting an above median salary.
 
 ### Conclusions on Schools and Salaries 
 
@@ -429,15 +429,8 @@ In conclusion, a student should choose the college California Institute of Techn
 
 
 
-```{r}
-NCHS
-whoIsPregnant2 <- 
-  NCHS %>%
-  filter(sex == "female") %>%
-  ctree(pregnant == "yes" ~ age + income + ethnicity + height + smoker + bmi, 
-        data = .)
-whoIsPregnant2
-```
+
+
 
 
 
