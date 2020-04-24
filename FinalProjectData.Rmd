@@ -220,7 +220,7 @@ mod1 <- party::ctree(Above_Avg_MidCareer_Median_Salary=="yes"~ School_Type+Regio
 plot(mod1,type="simple")
 ```
 
-According to this decision tree, the probability of having an above median mid career salary if you go to a state school leads to high chance of a high salary. This is a little shocking since Engineering and Ivy League Schools are grouped with Liberal Arts and Party Schools. We therefore believe that the size of our data-set is affecting our results and have chosen to ignore this conclusion. However, according to the desicion tree, If you go to a State School in the Midwestern, Southern or Western regions, you have a high probablity of 0.745 of getting an above median salary mid career. If you go to a Engineering or Ivy League Schools or Liberal Arts or Party Schools in the Southern or Western regions, you have a high probability of 0.474 of getting an above median salary mid career. This shows that the Southern and Western regions are the best indicators in the tree as leading to a higher salary, while the California Region leads to a low chance of a high salary no matter what school type you go to.
+According to this decision tree, Party and State Schools lead to a high chance of having an above average mid-career median salary. Specifically those in the Midwestern, Northeastern,Southern and Western regions have a high chance of 0.838. However this is inconsistent with what we have been seeing so far and we believe the size of our data-set is affecting our results and have chosen to ignore this conclusion. 
 
 
 We will do the same thing as up above but now we will look at starting median salary.
@@ -248,7 +248,7 @@ plot(mod1,type="simple")
 
 ```
 
-According to this decision tree, the probability of having an above median salary if you go to an Ivy-League or Engineering School is zero, which we know cannot be true. We therefore believe that the size of our data-set is affecting our results and have chosen to ignore this conclusion. However, according to the desicion tree, If you go to a School in the Midwestern, Southern or Western regions, you have a high probablity of 0.753 of getting an above median salary.
+According to this decision tree, the probability of having an above average starting median salary if you go to an Ivy-League or Engineering School is zero, which we know cannot be true. We therefore believe that the size of our data-set is affecting our results and have chosen to ignore this conclusion. However, according to the desicion tree, if you go to a School in the Midwestern, Southern or Western regions, you have a high probablity of 0.753 of getting an above average starting median salary.
 
 ### Conclusions on Schools and Salaries 
 
