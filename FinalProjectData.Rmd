@@ -201,11 +201,11 @@ SchoolSalariesGraphic
 
 ```{r}
 SchoolSalaries %>% # This code will find the mean for mid career salary
-  summarise(mean = sum(Mid_Career_Median_Salary)/349)
+  summarise(mean = sum(Mid_Career_Median_Salary)/339)
 MidCareerAvgMedianSalary <-
   SchoolSalaries %>%
   na.omit() %>%
-  mutate(Above_Avg_MidCareer_Median_Salary = ifelse(Mid_Career_Median_Salary <= 83609.74, "yes", "no")) # This code uses the mean to indicate an above or below for each school
+  mutate(Above_Avg_MidCareer_Median_Salary = ifelse(Mid_Career_Median_Salary <= 86076.11, "yes", "no")) # This code uses the mean to indicate an above or below for each school
 MidCareerAvgMedianSalary
 ```
 
@@ -214,8 +214,7 @@ Now we will make a tree to demostrate the importance of school type and region i
 ```{r}
 TreeForMidCareer <- 
   MidCareerAvgMedianSalary %>%
-  select(Above_Avg_MidCareer_Median_Salary, Starting_Median_Salary,Mid_Career_Median_Salary,School_Type, Region) %>%
-  na.omit() 
+  select(Above_Avg_MidCareer_Median_Salary, Starting_Median_Salary,Mid_Career_Median_Salary,School_Type, Region) 
 TreeForMidCareer<-TreeForMidCareer%>%mutate(School_Type=as.factor(School_Type), Region=as.factor(Region))
 mod1 <- party::ctree(Above_Avg_MidCareer_Median_Salary=="yes"~ School_Type+Region, data = TreeForMidCareer)
 plot(mod1,type="simple")
@@ -231,7 +230,6 @@ SchoolSalaries %>% # This code will find the mean for starting salary
   summarise(mean = sum(Starting_Median_Salary)/349)
 StartingAvgMedianSalary <-
   SchoolSalaries %>%
-  na.omit() %>%
   mutate(Above_Avg_Starting_Median_Salary = ifelse(Starting_Median_Salary <= 46093.41, "yes", "no"))
 StartingAvgMedianSalary
 ```
