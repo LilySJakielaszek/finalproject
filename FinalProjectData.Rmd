@@ -147,12 +147,14 @@ head(SchoolSalaries)
 
 Side by side box plots of the starting median salaries vs the mid-career median salaries for all schools.
 ```{r}
-StartingMedianSalary <- (SchoolSalaries$Starting_Median_Salary)
-MidCareerMedianSalary <- (SchoolSalaries$Mid_Career_Median_Salary)
-Medians <- c("Starting", "MidCareer")
-
-boxplot(StartingMedianSalary, MidCareerMedianSalary, names = Medians, ylab = "Salary", main = "Starting Median Salary vs MidCareer Median Salary for all Schools")
+ggplot(SchoolSalaries, aes(x = School_Type, y = Starting_Median_Salary)) +
+  geom_boxplot() +
+  xlab("School Type") +
+  ylab("Starting Median Salary") +
+  ggtitle("Starting Median Salary Based on School Type")
 ```
+
+
 
 Now we will observe the top ten schools with the highest starting median salaries 
 ```{r}
@@ -425,7 +427,6 @@ With these results we can conclude that the job with the highest salary is Chief
 # Conclusions for Answering the Research Question 
 
 In conclusion, a student should choose the college California Institute of Technology (CIT) , the major Physician Assistant , and the occupation Chief Executive. We chose these factors by the highest starting median salary. 
-
 
 
 
