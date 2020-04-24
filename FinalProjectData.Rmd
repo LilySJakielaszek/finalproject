@@ -205,20 +205,24 @@ SchoolSalaries %>% # This code will find the mean for mid career salary
 MidCareerAvgMedianSalary <-
   SchoolSalaries %>%
   na.omit() %>%
-  mutate(Above_Avg_MidCareer_Median_Salary = ifelse(Mid_Career_Median_Salary <= 83609.74, "Yes", "No")) # This code uses the mean to indicate an above or below for each school
+  mutate(Above_Avg_MidCareer_Median_Salary = ifelse(Mid_Career_Median_Salary <= 83609.74, "yes", "no")) # This code uses the mean to indicate an above or below for each school
 MidCareerAvgMedianSalary
 ```
 
-Now we will make a graph to demostrate the importance of school type and region in determining whether a school will have an above average mid career median salary
+Now we will make a tree to demostrate the importance of school type and region in determining whether a school will have an above average mid career median salary
 
 ```{r}
-MidCareerAvgMedianSalary %>%
-  head(20) %>%
-  ggplot() +
-  geom_point(aes(x = School_Name, y = Mid_Career_Median_Salary, color = Region)) +
-  facet_wrap(~ Above_Avg_MidCareer_Median_Salary) +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+TreeForMidCareer <- 
+  MidCareerAvgMedianSalary %>%
+  select(Above_Avg_MidCareer_Median_Salary, Starting_Median_Salary,Mid_Career_Median_Salary,School_Type, Region) %>%
+  na.omit() 
+TreeForMidCareer<-TreeForMidCareer%>%mutate(School_Type=as.factor(School_Type), Region=as.factor(Region))
+mod1 <- party::ctree(Above_Avg_MidCareer_Median_Salary=="yes"~ School_Type+Region, data = TreeForMidCareer)
+plot(mod1,type="simple")
 ```
+
+According to this decision tree, the probability of having an above median mid career salary if you go to a state school leads to high chance of a high salary. This is a little shocking since Engineering and Ivy League Schools are grouped with Liberal Arts and Party Schools. We therefore believe that the size of our data-set is affecting our results and have chosen to ignore this conclusion. However, according to the desicion tree, If you go to a State School in the Midwestern, Southern or Western regions, you have a high probablity of 0.745 of getting an above median salary mid career. If you go to a Engineering or Ivy League Schools or Liberal Arts or Party Schools in the Southern or Western regions, you have a high probability of 0.474 of getting an above median salary mid career. This shows that the Southern and Western regions are the best indicators in the tree as leading to a higher salary, while the California Region leads to a low chance of a high salary no matter what school type you go to.
+
 
 We will do the same thing as up above but now we will look at starting median salary
 
@@ -236,9 +240,17 @@ Now we will make a tree to demonstrate the importance of school type and region 
 
 ```{r}
 
+CompleteCases <- 
+  StartingAvgMedianSalary %>%
+  select(Above_Avg_Starting_Median_Salary, Starting_Median_Salary,Mid_Career_Median_Salary,School_Type, Region,School_Name) %>%
+  na.omit() 
+CompleteCases<-CompleteCases%>%mutate(School_Type=as.factor(School_Type), Region=as.factor(Region),School_Name=as.factor(School_Name))
+mod1 <- party::ctree(Above_Avg_Starting_Median_Salary=="yes"~ School_Type+Region+School_Name, data = CompleteCases)
+plot(mod1,type="simple")
 
 ```
 
+According to this decision tree, the probability of having an above median salary if you go to an Ivy-League or Engineering School is zero, which we know cannot be true. We therefore believe that the size of our data-set is affecting our results and have chosen to ignore this conclusion. However, according to the desicion tree, If you go to a School in the Midwestern, Southern or Western regions, you have a high probablity of 0.753 of getting an above median salary.
 
 ### Conclusions on Schools and Salaries 
 
@@ -406,7 +418,6 @@ Occupation_Proj_SalaryGraphic2
 ```
 
 
-
 ### Conclusions of Jobs and Salaries and Security 
 
 With these results we can conclude that the job with the highest salary is Chief Executives at $9,304,800 annual salary and the job with the best job secruity is Registered Nurses with 210,350 average annual job openings. From this analysis it is clear that the jobs that provide the highest job security do not provide the best security financially. 
@@ -414,17 +425,6 @@ With these results we can conclude that the job with the highest salary is Chief
 # Conclusions for Answering the Research Question 
 
 In conclusion, a student should choose the college California Institute of Technology (CIT) , the major Physician Assistant , and the occupation Chief Executive. We chose these factors by the highest starting median salary. 
-
-
-
-
-
-
-
-
-
-
-
 
 
 
