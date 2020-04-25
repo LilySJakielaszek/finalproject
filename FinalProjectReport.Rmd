@@ -39,8 +39,17 @@ if/else statements = .Rmd lines 209, 233
 ### Data Visualization
 
 (A) .Rmd Line number(s) for use of mulitple different geoms:
+geom_boxplot = .Rmd lines 150-154
+geom_point = .Rmd lines 191-199
+geom_bar = .Rmd lines 292-297, 376-383, 404-411
+
 (B) .Rmd Line number(s) for use of multiple aesthetics:
-(C) .Rmd Line number(s) for use of layered graphics:
+geom_boxplot = .Rmd 150-154
+geom_point = .Rmd lines 191-199
+
+(C) .Rmd Line number(s) for use of decision tree:
+ctree = .Rmd lines 215-224, 239-249
+
 
 ### For us only delete later
 (A) All data visualizations must be relevant to the stated research question, and the report must include at
